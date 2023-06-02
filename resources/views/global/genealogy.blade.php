@@ -58,7 +58,7 @@
         ])
         <section class="content">
             <div class="container-fluid">
-                <div style="width:100%; height:750px;" id="tree"></div>
+                <div style="width:100%; height:750px;" id="tree"><a href="{{route('add_first_member_view')}}" class="btn btn-info">Thêm thành viên mới</a></div>
             </div>
             {{-- Modal Option Member --}}
             <div class="modal fade" id="option" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -137,7 +137,10 @@
             treeConfig.template = 'john';
         }
 
-        var family = new FamilyTree(document.getElementById("tree"), treeConfig);
+        if (data.length > 0) {
+            var family = new FamilyTree(document.getElementById("tree"), treeConfig);
+        }
+        
         FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
         // FamilyTree.templates.myTemplate.field_0 = '<text style="font-size: 16px; font-weight: bold;" fill="white" x="65" y="60" text-anchor="middle">{val}</text>';
         // FamilyTree.templates.myTemplate.field_1 = '<text style="font-size: 13px;" fill="#4d4d4d" x="82" y="90" text-anchor="middle">Ngày sinh: {val}</text>';

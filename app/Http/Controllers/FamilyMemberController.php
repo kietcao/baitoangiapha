@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Constants\Gender;
 use App\Constants\Relation;
 use App\Http\Requests\CreateFamilyMemberRequest;
+use App\Http\Requests\CreateFirstMemberRequest;
 use App\Http\Requests\UpdateFamilyMemberRequest;
 use Illuminate\Http\Request;
 use App\Models\FamilyMember;
@@ -21,6 +22,21 @@ class FamilyMemberController extends Controller
         return view('global.genealogy', [
             'members' => $members
         ]);
+    }
+
+    public function addFirstMemberView()
+    {
+        return view('admin.add_first_member');
+    }
+
+    public function storeFirstMember(CreateFirstMemberRequest $request)
+    {
+        $data = $request->all();
+        $avatar = $this->storePublicImage($request->file('avatar'));
+        $data['avatar'] = $avatar;
+        FamilyMember::create($data);
+
+        return redirect()->route('genealogy');
     }
 
     public function addFamilyMemberView($fromMemberId)

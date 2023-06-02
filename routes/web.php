@@ -19,6 +19,8 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', [AuthController::class, 'login']);
 Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('genealogy', [FamilyMemberController::class, 'genealogy'])->name('genealogy');
+Route::get('add-first', [FamilyMemberController::class, 'addFirstMemberView'])->name('add_first_member_view');
+Route::post('add-first', [FamilyMemberController::class, 'storeFirstMember'])->name('add_first_member');
 Route::get('add-family-member/{from_member_id}', [FamilyMemberController::class, 'addFamilyMemberView'])->name('add_family_member_view');
 Route::post('add-family-member', [FamilyMemberController::class, 'addMemberToFamily'])->name('add_family_member');
 Route::get('edit-family-member/{id}', [FamilyMemberController::class, 'editFamilyMemberView'])->name('edit_family_member_view');
