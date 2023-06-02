@@ -25,3 +25,4 @@ Route::get('add-family-member/{from_member_id}', [FamilyMemberController::class,
 Route::post('add-family-member', [FamilyMemberController::class, 'addMemberToFamily'])->name('add_family_member');
 Route::get('edit-family-member/{id}', [FamilyMemberController::class, 'editFamilyMemberView'])->name('edit_family_member_view');
 Route::post('edit-family-member', [FamilyMemberController::class, 'updateFamilyMember'])->name('update_family_member');
+Route::get('member/{id}', [FamilyMemberController::class, 'detailMember'])->name('detail_member');

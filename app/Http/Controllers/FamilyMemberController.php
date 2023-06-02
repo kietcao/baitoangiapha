@@ -155,4 +155,18 @@ class FamilyMemberController extends Controller
 
         return redirect()->back();
     }
+
+    public function detailMember($id)
+    {
+        $member = FamilyMember::findOrFail($id);
+        $parent = FamilyMember::whereIn('id', [$member->fid, $member->mid])->get();
+        $child = FamilyMember::where('fid', $member->id)->orWhere('mid', $member->id)->get();
+        $couple = FamilyMember::whereIn('id', $member->pids)->get();
+        return view('admin.detail_member', [
+            'member' => $member,
+            'parent' => $parent,
+            'child' => $child,
+            'couple' => $couple
+        ]);
+    }
 }

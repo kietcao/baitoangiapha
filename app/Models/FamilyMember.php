@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Carbon\Carbon;
 
 class FamilyMember extends Model
 {
@@ -50,5 +51,10 @@ class FamilyMember extends Model
         }
         
         return [];
+    }
+
+    public function age()
+    {
+        return Carbon::parse($this->attributes['birthday'])->age;
     }
 }

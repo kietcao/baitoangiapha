@@ -84,7 +84,7 @@
                                     </button>
                                 </div>
                                 <div class="col-12 col-md-3 option-button-wrapper">
-                                    <button class="option-button">
+                                    <button class="option-button" id="detail-member">
                                         <div><span>Chi tiết thành viên</span></div>
                                     </button>
                                 </div>
@@ -161,5 +161,8 @@
         $('#edit-member-view').click(function(){
             location.href = `edit-family-member/${currentMemberId}`;
         });
+        $('#detail-member').click(function(){
+            location.href = `member/${currentMemberId}`;
+        })
     </script>
 @endsection

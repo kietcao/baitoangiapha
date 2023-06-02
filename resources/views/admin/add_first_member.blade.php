@@ -109,7 +109,7 @@
                                 <i class="text-danger">{{$message}}</i>
                             @enderror
                         </div>
-                        <div class="form-group col-md-2 gender d-none">
+                        <div class="form-group col-md-2 gender">
                             <label for="">Giới tính</label>
                             <div class="d-flex align-items-center pt-2">
                                 <div class="d-flex align-items-center pr-4">
