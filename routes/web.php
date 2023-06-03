@@ -17,7 +17,7 @@ use App\Http\Controllers\DashboardController;
 */
 
 Route::get('/', [AuthController::class, 'loginView'])->name('login_view');
-Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'login'])->name('login')->middleware('check-limit-login');
 Route::group(['middleware' => 'auth-admin'], function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('genealogy', [FamilyMemberController::class, 'genealogy'])->name('genealogy');
