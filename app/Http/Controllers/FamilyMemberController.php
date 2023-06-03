@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Constants\Gender;
 use App\Constants\Relation;
+use App\Constants\CurrentPage;
 use App\Http\Requests\CreateFamilyMemberRequest;
 use App\Http\Requests\CreateFirstMemberRequest;
 use App\Http\Requests\UpdateFamilyMemberRequest;
@@ -20,13 +21,16 @@ class FamilyMemberController extends Controller
     {
         $members = FamilyMember::orderBy('position_index', 'asc')->get();
         return view('global.genealogy', [
-            'members' => $members
+            'members' => $members,
+            'current_page' => CurrentPage::GENEALOGY,
         ]);
     }
 
     public function addFirstMemberView()
     {
-        return view('admin.add_first_member');
+        return view('admin.add_first_member', [
+            'current_page' => CurrentPage::GENEALOGY,
+        ]);
     }
 
     public function storeFirstMember(CreateFirstMemberRequest $request)
@@ -45,7 +49,8 @@ class FamilyMemberController extends Controller
         $couple = FamilyMember::whereIn('id', $fromMember->pids)->get();
         return view('admin.add_family_member', [
             'fromMember' => $fromMember,
-            'couple' => $couple
+            'couple' => $couple,
+            'current_page' => CurrentPage::GENEALOGY,
         ]);
     }
 
@@ -121,7 +126,8 @@ class FamilyMemberController extends Controller
     {
         $member = FamilyMember::findOrFail($id);
         return view('admin.edit_family_member', [
-            'member' => $member
+            'member' => $member,
+            'current_page' => CurrentPage::GENEALOGY,
         ]);
     }
 
@@ -148,11 +154,6 @@ class FamilyMemberController extends Controller
         $member->story = $request->story;
         $member->save();
 
-        Mail::send('welcome', [], function ($message) {
-            $message->to('lethithuybinh211@gmail.com');
-            $message->subject('Testing');
-        });
-
         return redirect()->back();
     }
 
@@ -166,7 +167,8 @@ class FamilyMemberController extends Controller
             'member' => $member,
             'parent' => $parent,
             'child' => $child,
-            'couple' => $couple
+            'couple' => $couple,
+            'current_page' => CurrentPage::GENEALOGY,
         ]);
     }
 

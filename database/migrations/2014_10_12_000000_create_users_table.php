@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('address')->nullable()->default(null);
+            $table->string('avatar')->nullable()->default(null);
             $table->string('cccd_number')->nullable()->default(null);
             $table->string('cccd_image_before')->nullable()->default(null);
             $table->string('cccd_image_after')->nullable()->default(null);

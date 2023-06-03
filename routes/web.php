@@ -16,14 +16,19 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', [AuthController::class, 'login']);
-Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('genealogy', [FamilyMemberController::class, 'genealogy'])->name('genealogy');
-Route::get('add-first', [FamilyMemberController::class, 'addFirstMemberView'])->name('add_first_member_view');
-Route::post('add-first', [FamilyMemberController::class, 'storeFirstMember'])->name('add_first_member');
-Route::get('add-family-member/{from_member_id}', [FamilyMemberController::class, 'addFamilyMemberView'])->name('add_family_member_view');
-Route::post('add-family-member', [FamilyMemberController::class, 'addMemberToFamily'])->name('add_family_member');
-Route::get('edit-family-member/{id}', [FamilyMemberController::class, 'editFamilyMemberView'])->name('edit_family_member_view');
-Route::post('edit-family-member', [FamilyMemberController::class, 'updateFamilyMember'])->name('update_family_member');
-Route::get('member/{id}', [FamilyMemberController::class, 'detailMember'])->name('detail_member');
-Route::post('member/{id}/delete', [FamilyMemberController::class, 'deleteMember'])->name('delete_member');
+Route::get('/', [AuthController::class, 'loginView'])->name('login_view');
+Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::group(['middleware' => 'auth-admin'], function() {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('genealogy', [FamilyMemberController::class, 'genealogy'])->name('genealogy');
+    Route::get('add-first', [FamilyMemberController::class, 'addFirstMemberView'])->name('add_first_member_view');
+    Route::post('add-first', [FamilyMemberController::class, 'storeFirstMember'])->name('add_first_member');
+    Route::get('add-family-member/{from_member_id}', [FamilyMemberController::class, 'addFamilyMemberView'])->name('add_family_member_view');
+    Route::post('add-family-member', [FamilyMemberController::class, 'addMemberToFamily'])->name('add_family_member');
+    Route::get('edit-family-member/{id}', [FamilyMemberController::class, 'editFamilyMemberView'])->name('edit_family_member_view');
+    Route::post('edit-family-member', [FamilyMemberController::class, 'updateFamilyMember'])->name('update_family_member');
+    Route::get('member/{id}', [FamilyMemberController::class, 'detailMember'])->name('detail_member');
+    Route::post('member/{id}/delete', [FamilyMemberController::class, 'deleteMember'])->name('delete_member');
+
+    Route::post('logout', [AuthController::class, 'logoutUser'])->name('logout_user');
+});
