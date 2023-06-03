@@ -169,4 +169,34 @@ class FamilyMemberController extends Controller
             'couple' => $couple
         ]);
     }
+
+    public function deleteMember(Request $request)
+    {
+        // Validate delete member
+        $member = FamilyMember::find($request->id);
+
+        // Check is coupe
+        $isCouple = count($member->pids) > 0 ? true : false;
+        $isHasChild = FamilyMember::where('fid', $member->id)->orWhere('mid', $member->id)->count() > 0 ? true : false;
+        $isHasParent = !empty($member->fid) || !empty($member->mid) ? true : false;
+
+        if ($isCouple && $isHasChild || $isHasChild || $isCouple && $isHasParent) {
+            return $this->errorMessage('Failed to delete');
+        }
+
+
+        if ($isCouple) {
+            $couple = FamilyMember::whereIn('id', $member->pids)->get();
+            foreach ($couple as $couple) {
+                $couplePids = $couple->pids;
+                $couplePids = array_diff( $couplePids, [$member->id] );
+                $couplePids = implode(',', $couplePids);
+                $couple->pids = !empty($couplePids) ? $couplePids : null;
+                $couple->save();
+            }
+        }
+
+        $member->delete();
+        return redirect()->back();
+    }
 }

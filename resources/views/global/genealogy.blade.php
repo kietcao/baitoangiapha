@@ -88,11 +88,12 @@
                                         <div><span>Chi tiết thành viên</span></div>
                                     </button>
                                 </div>
-                                <div class="col-12 col-md-3 option-button-wrapper">
-                                    <button class="option-button">
+                                <form action="" method="post" class="col-12 col-md-3 option-button-wrapper" id="form-delete-member">
+                                    @csrf
+                                    <button class="option-button" id="delete-member">
                                         <div><span>Xoá thành viên</span></div>
                                     </button>
-                                </div>
+                                </form>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -142,9 +143,6 @@
         }
         
         FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
-        // FamilyTree.templates.myTemplate.field_0 = '<text style="font-size: 16px; font-weight: bold;" fill="white" x="65" y="60" text-anchor="middle">{val}</text>';
-        // FamilyTree.templates.myTemplate.field_1 = '<text style="font-size: 13px;" fill="#4d4d4d" x="82" y="90" text-anchor="middle">Ngày sinh: {val}</text>';
-        //FamilyTree.templates.myTemplate.field_2 = '<text style="font-size: 13px;" fill="#4d4d4d" x="82" y="107" text-anchor="middle">Ngày mất: {val}</text>';
         FamilyTree.templates.myTemplate.field_0 = `<text data-width="230" style="font-size: 14px;font-weight:bold;" fill="#ffffff" x="10" y="65" text-anchor="start">{val}</text>`;
         FamilyTree.templates.myTemplate.field_1 = `<text data-width="150" style="font-size: 12px;" fill="#000000ab" x="11" y="90" text-anchor="start">Ngày sinh: {val}</text>`;
         FamilyTree.templates.myTemplate.field_2 = `<text data-width="150" style="font-size: 12px;" fill="#000000ab" x="11" y="107" text-anchor="start">Ngày mất: {val}</text>`;
@@ -153,6 +151,8 @@
             var id = data.id;
             currentMemberId = data.id;
             $('#option').modal('show');
+            $('#form-delete-member').attr('action', `member/${currentMemberId}/delete`);
+            checkValidForDelete(currentMemberId);
         });
 
         $('#add-member-view').click(function(){
@@ -163,6 +163,44 @@
         });
         $('#detail-member').click(function(){
             location.href = `member/${currentMemberId}`;
-        })
+        });
+
+        function checkValidForDelete(currentMemberId)
+        {
+            // Is couple + has child OR only has child OR is has couple + has parent => don't delete
+            let findIndex = data.findIndex(function(item){
+                return item.id == currentMemberId;
+            });
+            let member = data[findIndex];
+
+            // Check has bride or crumb
+            let isCouple = member.pids.length > 0 ? true : false;
+
+            // Check has child
+            let isHasChild = false;
+            let countChild = 0;
+            data.forEach(function (current, index) {
+                if (member.gender == {{App\Constants\Gender::MALE}}) {
+                    let currentFatherId = current.fid;
+                    if (currentFatherId == currentMemberId) {
+                        countChild++;
+                    }
+                } else {
+                    let currentMotherId = current.mid;
+                    if (currentMotherId == currentMemberId) {
+                        countChild++;
+                    }
+                }
+            });
+            isHasChild = countChild > 0 ? true : false;
+
+            // Check is has parent
+            let isHasParent = member.mid != null || member.fid != null ? true : false;
+
+            //Show button delete person
+            isHasChild && isCouple || isHasChild || isCouple && isHasParent
+                ? $('#delete-member').css({'opacity' : '0.2'}).prop('disabled', true)
+                : $('#delete-member').css({'opacity' : '1'}).prop('disabled', false);
+        }
     </script>
 @endsection

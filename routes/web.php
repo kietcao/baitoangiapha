@@ -26,3 +26,4 @@ Route::post('add-family-member', [FamilyMemberController::class, 'addMemberToFam
 Route::get('edit-family-member/{id}', [FamilyMemberController::class, 'editFamilyMemberView'])->name('edit_family_member_view');
 Route::post('edit-family-member', [FamilyMemberController::class, 'updateFamilyMember'])->name('update_family_member');
 Route::get('member/{id}', [FamilyMemberController::class, 'detailMember'])->name('detail_member');
+Route::post('member/{id}/delete', [FamilyMemberController::class, 'deleteMember'])->name('delete_member');
