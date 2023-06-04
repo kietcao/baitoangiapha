@@ -80,14 +80,16 @@
                         </p>
                     </a>
                 </li>
+                @if (auth()->user()->user_type == App\Constants\UserType::ADMIN)
                 <li class="nav-item">
-                    <a href="pages/widgets.html" class="nav-link">
+                    <a href="{{route('users')}}" class="nav-link @if($current_page == App\Constants\CurrentPage::USER){{'active'}}@endif">
                         <i class="nav-icon fas fa-users"></i>
                         <p>
                             Quản lý thành viên
                         </p>
                     </a>
                 </li>
+                @endif
                 <li class="nav-header">Tài khoản</li>
                 <li class="nav-item">
                     <a href="pages/widgets.html" class="nav-link">

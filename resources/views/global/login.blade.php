@@ -5,58 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Đăng nhập</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/login.css">
+    <title>Đăng ký thành viên</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <link rel="stylesheet" href="css/auth_css_1.css">
 </head>
 
 <body>
 
 
-    <div class="container">
-        <div class="screen">
-            <div class="screen__content">
-                <form class="login" action="{{route('login')}}" method="post">
-                    @csrf
-                    <div class="login__field">
-                        <i class="login__icon fas fa-user"></i>
-                        <input type="text" class="login__input" placeholder="Email" name="email" value="{{old('email')}}">
-                        @error('email')
-                            <div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div>
-                        @enderror
-                    </div>
-                    <div class="login__field">
-                        <i class="login__icon fas fa-lock"></i>
-                        <input type="password" class="login__input" placeholder="Password" name="password">
-                        @error('password')
-                            <div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div>
-                        @enderror
-                    </div>
-                    @if($errors->has('message'))
-                        <i class="text-danger">{{$errors->first()}}</i>
-                    @endif
-                    <button class="button login__submit">
-                        <span class="button__text">Đăng nhập</span>
-                        <i class="button__icon fas fa-chevron-right"></i>
-                    </button>
-                </form>
-                <div class="social-login">
-                    <h3>Tùy chọn</h3>
-                    <div class="social-icons">
-                        <a href="#" class="social-login__icon d-block">Quên mật khẩu</a>
-                        <a href="#" class="social-login__icon fab fa-instagram d-block">Đăng ký</a>
+    <div class="container register">
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
+                <h3>Welcome</h3>
+                <p>Đăng ký tham gia hệ thống quản lý gia phả</p>
+                <a href="{{route('login_view')}}" class="btnLogin">Đăng ký</a>
+            </div>
+            <div class="col-md-9 register-right">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Đăng nhập</h3>
+                        <form class="row register-form" action="{{route('login')}}" method="post">
+                            @csrf
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Email *" name="email" value="{{old('email')}}">
+                                    @error('email')
+                                        <div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Password *" name="password">
+                                    @error('password')
+                                        <div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                @if($errors->has('message'))
+                                    <i class="text-danger">{{$errors->first()}}</i>
+                                @endif
+                            </div>
+                            <div class="col-md-12">
+                                <a href="">Quên mật khẩu</a>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="submit" class="btnRegister" value="Đăng nhập" />
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="screen__background">
-                <span class="screen__background__shape screen__background__shape4"></span>
-                <span class="screen__background__shape screen__background__shape3"></span>
-                <span class="screen__background__shape screen__background__shape2"></span>
-                <span class="screen__background__shape screen__background__shape1"></span>
-            </div>
         </div>
+
     </div>
 
 </body>
-
 </html>

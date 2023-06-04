@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('address')->nullable()->default(null);
             $table->string('avatar')->nullable()->default(null);
+            $table->tinyInteger('enable_status')->nullable()->default(1)->comment('0: disable, 1: active, 2: un-active');
             $table->string('cccd_number')->nullable()->default(null);
             $table->string('cccd_image_before')->nullable()->default(null);
             $table->string('cccd_image_after')->nullable()->default(null);

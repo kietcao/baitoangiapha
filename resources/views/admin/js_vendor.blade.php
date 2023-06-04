@@ -33,3 +33,6 @@
 <script src="vendor/adminlte/dist/js/pages/dashboard.js"></script>
 <!-- CKEditor -->
 <script src="vendor/ckeditor4/ckeditor.js"></script>
+<!-- Datatable -->
+<script src="vendor/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

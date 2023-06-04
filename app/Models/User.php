@@ -22,6 +22,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'user_type',
+        'address',
+        'avatar',
+        'enable_status',
+        'cccd_number',
+        'cccd_image_before',
+        'cccd_image_after',
     ];
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Constants\EnableStatus;
 
 class AuthMiddleware
 {
@@ -18,6 +19,12 @@ class AuthMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()){
+            if (Auth::user()->enable_status == EnableStatus::DISABLE) {
+                abort(403, 'Bị vô hiệu hóa');
+            }
+            else if (Auth::user()->enable_status == EnableStatus::UNACTIVE) {
+                abort(403, 'Reset password');
+            }
             return $next($request);
         }
         return redirect()->route('login_view');

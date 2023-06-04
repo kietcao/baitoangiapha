@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'auth-admin' => \App\Http\Middleware\AuthMiddleware::class,
         'check-limit-login' => \App\Http\Middleware\CheckWrongLimitLoginMiddleware::class,
+        'get-cccd' => \App\Http\Middleware\GetCCCDMiddleware::class,
     ];
 }
