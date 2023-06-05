@@ -69,6 +69,10 @@
         g:hover rect {
             filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.278));
         }
+
+        use {
+            display: none;
+        }
     </style>
     <div class="content-wrapper">
         @include('global.content_head', [
@@ -162,7 +166,7 @@
         
         FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
         FamilyTree.templates.myTemplate.size = [200, 230];
-        FamilyTree.templates.myTemplate.field_0 = `<text data-width="200" style="font-size: 14px;font-weight:bold; text-transform: uppercase;" fill="black" x="100" y="137" text-anchor="middle">{val}</text>`;
+        FamilyTree.templates.myTemplate.field_0 = `<text data-width="200" style="font-size: 14px;font-weight:bold; text-transform: uppercase;" fill="black" x="100" y="125" text-anchor="middle">{val}</text>`;
         FamilyTree.templates.myTemplate.field_1 = `<text data-width="200" style="font-size: 12px;" fill="#000000ab" x="11" y="167" text-anchor="start">Ngày sinh: {val}</text>`;
         FamilyTree.templates.myTemplate.field_2 = `<text data-width="200" style="font-size: 12px;" fill="#000000ab" x="11" y="185" text-anchor="start">Ngày mất: {val}</text>`;
         FamilyTree.templates.myTemplate.img_0 =
