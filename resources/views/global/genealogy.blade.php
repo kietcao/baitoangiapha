@@ -51,6 +51,24 @@
             align-items: center;
             background-color: rgb(0 0 0 / 68%);
         }
+
+        g,
+        g * {
+            cursor: pointer;
+        }
+
+        rect {
+            fill: white;
+            rx: 10;
+            ry: 10;
+            stroke: rgba(0, 0, 0, 0.048);
+            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.067));
+            transition: .3s;
+        }
+
+        g:hover rect {
+            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.278));
+        }
     </style>
     <div class="content-wrapper">
         @include('global.content_head', [
@@ -143,9 +161,17 @@
         }
         
         FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
-        FamilyTree.templates.myTemplate.field_0 = `<text data-width="230" style="font-size: 14px;font-weight:bold;" fill="#ffffff" x="10" y="65" text-anchor="start">{val}</text>`;
-        FamilyTree.templates.myTemplate.field_1 = `<text data-width="150" style="font-size: 12px;" fill="#000000ab" x="11" y="90" text-anchor="start">Ngày sinh: {val}</text>`;
-        FamilyTree.templates.myTemplate.field_2 = `<text data-width="150" style="font-size: 12px;" fill="#000000ab" x="11" y="107" text-anchor="start">Ngày mất: {val}</text>`;
+        FamilyTree.templates.myTemplate.size = [200, 230];
+        FamilyTree.templates.myTemplate.field_0 = `<text data-width="200" style="font-size: 14px;font-weight:bold; text-transform: uppercase;" fill="black" x="100" y="137" text-anchor="middle">{val}</text>`;
+        FamilyTree.templates.myTemplate.field_1 = `<text data-width="200" style="font-size: 12px;" fill="#000000ab" x="11" y="167" text-anchor="start">Ngày sinh: {val}</text>`;
+        FamilyTree.templates.myTemplate.field_2 = `<text data-width="200" style="font-size: 12px;" fill="#000000ab" x="11" y="185" text-anchor="start">Ngày mất: {val}</text>`;
+        FamilyTree.templates.myTemplate.img_0 =
+        '<clipPath id="ulaImg">'
+        + '<circle cx="100" cy="50" r="40"></circle>'
+        + '</clipPath>'
+        + '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="60" y="10" width="80" height="80">'
+        + '</image>';
+
         family.on('click', function(sender, args) {
             var data = sender.get(args.node.id);
             var id = data.id;
