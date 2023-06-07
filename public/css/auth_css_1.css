@@ -139,3 +139,32 @@
 .wrap-cccd input {
     margin-top: 5px;
 }
+
+@media screen and (max-width: 767px) {
+    .register {
+        margin: 0 auto;
+        min-height: 100vh;
+    }
+    .register-left {
+        height: auto;
+    }
+    .register-left p{
+        margin: 0;
+        padding: 0;
+    }
+    .register-left img {
+        margin-top: 0;
+    }
+    .register-left a {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .register-right {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}
