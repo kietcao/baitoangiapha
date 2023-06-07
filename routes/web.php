@@ -21,7 +21,8 @@ Route::get('/', [AuthController::class, 'loginView'])->name('login_view');
 Route::post('login', [AuthController::class, 'login'])->name('login')->middleware('check-limit-login');
 Route::get('reset-password/{token}', [AuthController::class, 'resetPasswordView'])->name('reset_password_view');
 Route::post('reset-password', [AuthController::class, 'confirmResetPassword'])->name('reset_password');
-Route::get('register', [AuthController::class, 'registerView'])->name('register_view');
+Route::get('register', [UserController::class, 'registerView'])->name('register_view');
+Route::post('register', [UserController::class, 'registerUser'])->name('register_user');
 Route::group(['middleware' => ['auth-admin']], function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('genealogy', [FamilyMemberController::class, 'genealogy'])->name('genealogy');

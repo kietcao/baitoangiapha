@@ -20,7 +20,7 @@
                 <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
                 <h3>Welcome</h3>
                 <p>Đăng ký tham gia hệ thống quản lý gia phả</p>
-                <a href="{{route('login_view')}}" class="btnLogin">Đăng ký</a>
+                <a href="{{route('register_view')}}" class="btnLogin">Đăng ký</a>
             </div>
             <div class="col-md-9 register-right">
                 <div class="tab-content" id="myTabContent">

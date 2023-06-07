@@ -79,9 +79,4 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('login_view');
     }
-
-    public function registerView()
-    {
-        return view('global.user_register');
-    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Constants\CurrentPage;
+use App\Constants\UserType;
 use App\Http\Requests\AdminRegisterUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use App\Constants\EnableStatus;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Password;
+use App\Http\Requests\RegisterUserRequest;
 
 class UserController extends Controller
 {
@@ -86,5 +88,40 @@ class UserController extends Controller
     public function getCCCDImage($imagePath)
     {
         return $this->getCCCD($imagePath);
+    }
+
+    public function registerView()
+    {
+        return view('global.user_register');
+    }
+
+    public function registerUser(RegisterUserRequest $request)
+    {
+        $user = new User;
+        if ($request->has('avatar')) {
+            $avatar = $this->storePublicImage($request->file('avatar'), 'img/members');
+            $user->avatar = $avatar;
+        }
+        if ($request->has('cccd_image_before') && $request->has('cccd_image_after')) {
+            $cccdImageBefore = $this->storeCCCD($request->file('cccd_image_before'));
+            $user->cccd_image_before = $cccdImageBefore;
+            $cccdImageAfter = $this->storeCCCD($request->file('cccd_image_after'));
+            $user->cccd_image_after = $cccdImageAfter;
+        }
+        $user->user_type = UserType::USER;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->cccd_number = $request->cccd_number;
+        $user->enable_status = EnableStatus::DISABLE;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        Mail::send('mail.request-join', ['user' => $user], function ($message) {
+            $message->to(env('ADMIN_EMAIL'));
+            $message->subject('YÊU CẦU THAM GIA');
+        });
+        
+        return view('global.messages_auth_view');
     }
 }

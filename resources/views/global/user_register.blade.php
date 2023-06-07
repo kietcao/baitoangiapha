@@ -12,8 +12,6 @@
 </head>
 
 <body>
-
-
     <div class="container register">
         <div class="row">
             <div class="col-md-3 register-left">
@@ -24,27 +22,40 @@
             </div>
             <div class="col-md-9 register-right">
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <form action="{{route('register_user')}}" method="post" class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab" enctype="multipart/form-data">
+                        @csrf
                         <h3 class="register-heading">Đăng ký thành viên</h3>
                         <div class="row register-form">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Họ và tên *" value="" />
+                                    <input type="text" class="form-control" placeholder="Họ và tên *" value="{{old('name')}}" name="name" />
+                                    @error('name')
+                                        <div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Email *" value="" />
+                                    <input type="text" class="form-control" placeholder="Email *" name="email" value="{{old('email')}}" />
+                                    @error('email')
+                                        <div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Địa chỉ" value="" />
+                                    <input type="text" class="form-control" placeholder="Địa chỉ" name="address" value="{{old('address')}}" />
+                                    @error('address')
+                                        <div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Mã căn cước *" value="" />
+                                    <input type="text" class="form-control" placeholder="Mã căn cước *" name="cccd_number" value="{{old('cccd_number')}}" />
+                                    @error('cccd_number')
+                                        <div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 select-cccd">
@@ -53,7 +64,10 @@
                                     <div class="wrap-preview">
                                         <img src="img/fixed/before_cccd_default.jpg">
                                     </div>
-                                    <input type="file" class="form-control"/>
+                                    <input type="file" class="form-control" name="cccd_image_before" accept="image/*"/>
+                                    @error('cccd_image_before')
+                                        <div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 select-cccd">
@@ -62,25 +76,33 @@
                                     <div class="wrap-preview">
                                         <img src="img/fixed/after_cccd_default.jpg">
                                     </div>
-                                    <input type="file" class="form-control"/>
+                                    <input type="file" class="form-control" name="cccd_image_after" accept="image/*"/>
+                                    @error('cccd_image_after')
+                                        <div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Mật khẩu *" value="" />
+                                    <input type="text" class="form-control" placeholder="Mật khẩu *" name="password" />
+                                    @error('password')
+                                        <div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Nhập lại mật khẩu *" value="" />
+                                    <input type="text" class="form-control" placeholder="Nhập lại mật khẩu *" name="re_password" />
+                                    @error('re_password')
+                                        <div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <input type="submit" class="btnRegister" value="Đăng ký" />
                             </div>
-                            
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

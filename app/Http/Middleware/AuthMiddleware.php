@@ -20,7 +20,8 @@ class AuthMiddleware
     {
         if (Auth::check()){
             if (Auth::user()->enable_status == EnableStatus::DISABLE) {
-                abort(403, 'Bị vô hiệu hóa');
+                Auth::logout();
+                abort(403, 'Bị vô hiệu hoá hoặc chưa có quyền truy cập');
             }
             else if (Auth::user()->enable_status == EnableStatus::UNACTIVE) {
                 abort(403, 'Reset password');

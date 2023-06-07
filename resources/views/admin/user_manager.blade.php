@@ -127,7 +127,7 @@
                 dataType: 'json',
                 data : {
                     _token : '{{csrf_token()}}',
-                    is_enable : isEnable,
+                    enable_status : isEnable,
                     id : id
                 },
                 success: function(response) {
