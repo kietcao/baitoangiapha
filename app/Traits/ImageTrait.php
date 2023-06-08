@@ -12,6 +12,9 @@ trait ImageTrait
 {
     public function storePublicImage($image, $path = 'img/family_member')
     {
+        if(!File::isDirectory(public_path($path)) ) {
+            File::makeDirectory($path, 493, true);
+        }
         $filename = time() . '.' . $image->getClientOriginalExtension();
         $path = $path . "/" . $filename;
         $storagePath = public_path($path);
