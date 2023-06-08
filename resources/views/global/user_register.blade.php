@@ -26,6 +26,15 @@
                         @csrf
                         <h3 class="register-heading">Đăng ký thành viên</h3>
                         <div class="row register-form">
+                            <div class="col-md-12 mb-4">
+                                <div class="wrap-preview-avatar">
+                                    <img src="img/fixed/default_avatar.png">
+                                    <input type="file" name="avatar" accept="image/*">
+                                </div>
+                                @error('avatar')
+                                <div class="text-center"><div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div></div>
+                                @enderror
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Họ và tên *" value="{{old('name')}}" name="name" />
@@ -60,7 +69,7 @@
                             </div>
                             <div class="col-md-6 select-cccd">
                                 <div class="wrap-cccd form-group">
-                                    <label>Mặt trước căn cước:</label>
+                                    <label>Mặt trước căn cước: <span class="text-danger">*</span></label>
                                     <div class="wrap-preview">
                                         <img src="img/fixed/before_cccd_default.jpg">
                                     </div>
@@ -72,7 +81,7 @@
                             </div>
                             <div class="col-md-6 select-cccd">
                                 <div class="wrap-cccd form-group">
-                                    <label>Mặt sau căn cước:</label>
+                                    <label>Mặt sau căn cước: <span class="text-danger">*</span></label>
                                     <div class="wrap-preview">
                                         <img src="img/fixed/after_cccd_default.jpg">
                                     </div>
@@ -84,7 +93,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Mật khẩu *" name="password" />
+                                    <input type="password" class="form-control" placeholder="Mật khẩu *" name="password" />
                                     @error('password')
                                         <div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div>
                                     @enderror
@@ -92,7 +101,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Nhập lại mật khẩu *" name="re_password" />
+                                    <input type="password" class="form-control" placeholder="Nhập lại mật khẩu *" name="re_password" />
                                     @error('re_password')
                                         <div style="font-size: 13px; padding-top: 2px;"><i class="text-danger">{{$message}}</i></div>
                                     @enderror
@@ -118,6 +127,18 @@
 
         reader.onload = function(e) {
             _this.closest('.select-cccd').find('img').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+    });
+
+    $('.wrap-preview-avatar').find('input').change(function(){
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        let _this = $(this);
+
+        reader.onload = function(e) {
+            _this.closest('.wrap-preview-avatar').find('img').attr('src', e.target.result);
         };
 
         reader.readAsDataURL(file);
