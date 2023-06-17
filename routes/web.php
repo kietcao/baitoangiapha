@@ -38,6 +38,9 @@ Route::group(['middleware' => ['auth-admin']], function() {
     Route::post('users/update-is-enable', [UserController::class, 'updateIsEnable'])->name('update_is_enable');
     Route::get('admin/user/register', [UserController::class, 'adminUserRegisterView'])->name('admin_user_register_view');
     Route::post('admin/user/register', [UserController::class, 'adminUserRegister'])->name('admin_user_register');
+    Route::get('mypage', [AuthController::class, 'mypageView'])->name('mypage');
+    Route::post('mypage/update-info', [AuthController::class, 'updateUserInfo'])->name('mypage.update_info');
+    Route::post('mypage/update-password', [AuthController::class, 'changePassword'])->name('mypage.update_password');
     Route::post('logout', [AuthController::class, 'logoutUser'])->name('logout_user');
 });
 
