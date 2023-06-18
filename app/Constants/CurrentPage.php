@@ -8,4 +8,5 @@ final class CurrentPage
     const GENEALOGY = 2;
     const USER = 3;
     const MYPAGE = 4;
+    const EVENT = 5;
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FamilyMemberController;
@@ -41,6 +42,9 @@ Route::group(['middleware' => ['auth-admin']], function() {
     Route::get('mypage', [AuthController::class, 'mypageView'])->name('mypage');
     Route::post('mypage/update-info', [AuthController::class, 'updateUserInfo'])->name('mypage.update_info');
     Route::post('mypage/update-password', [AuthController::class, 'changePassword'])->name('mypage.update_password');
+    Route::get('events', [EventController::class, 'getEvents'])->name('event_list');
+    Route::post('create-event', [EventController::class, 'store'])->name('create_event');
+
     Route::post('logout', [AuthController::class, 'logoutUser'])->name('logout_user');
 });
 
