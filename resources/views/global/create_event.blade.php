@@ -113,6 +113,9 @@
                                             </div>
                                         </th>
                                     </thead>
+                                    @php
+                                        $memberChecked = explode(',', old('join_members'));
+                                    @endphp
                                     <tbody>
                                         @foreach($members as $member)
                                         <tr>
@@ -131,7 +134,14 @@
                                                 @endif
                                             </td>
                                             <td class="text-center pl-2">
-                                                <input data-id={{$member->id}} type="checkbox" class="check-member">
+                                                <input
+                                                    data-id={{$member->id}}
+                                                    type="checkbox"
+                                                    class="check-member"
+                                                    @if (in_array($member->id, $memberChecked))
+                                                    checked
+                                                    @endif
+                                                >
                                             </td>
                                         </tr>
                                         @endforeach

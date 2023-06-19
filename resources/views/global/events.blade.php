@@ -8,26 +8,27 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-                    <div class="row">
+                    {{old('keyword')}}
+                    <form class="row" action="{{route('events')}}" method="get" enctype="multipart/form-data">
                         <div class="form-group col-md-3">
                             <label for="">Tên sự kiện</label>
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" name="keyword" value="{{$inputed['keyword'] ?? null}}">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="">Từ ngày</label>
-                            <input type="date" class="form-control" name="from_date">
+                            <input type="text" class="form-control" name="from_date" value="{{$inputed['from_date'] ?? null}}">
                         </div>
                         <div class="form-group col-md-3">
                             <label for="">Đến ngày</label>
-                            <input type="date" class="form-control" name="to_date">
+                            <input type="text" class="form-control" name="to_date" value="{{$inputed['to_date'] ?? null}}">
                         </div>
                         <div class="form-group col-md-1 pt-2">
-                            <button class="btn btn-info mt-4">Tìm kiếm</button>
+                            <button type="submit" class="btn btn-info mt-4">Tìm kiếm</button>
                         </div>
                         <div class="form-group col-md-2 pt-2 text-right">
                             <a href="{{route('create_event_view')}}" class="btn btn-success mt-4">Tạo sự kiện</a>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -56,7 +57,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="pt-md-4 d-flex justify-content-center">{{$events->links()}}</div>
+                    <div class="pt-md-4 d-flex justify-content-center">{{$events->appends($inputed)->links()}}</div>
                 </div>
             </div>
         </div>

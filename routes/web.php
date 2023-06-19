@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth-admin']], function() {
     Route::get('events', [EventController::class, 'getEvents'])->name('event_list');
     Route::post('create-event', [EventController::class, 'store'])->name('create_event');
     Route::get('create-event', [EventController::class, 'create'])->name('create_event_view');
-    Route::post('events', [EventController::class, 'getEvents'])->name('create_event');
+    Route::post('events', [EventController::class, 'getEvents'])->name('events');
 
     Route::post('logout', [AuthController::class, 'logoutUser'])->name('logout_user');
 });

@@ -12,13 +12,25 @@ use Carbon\Carbon;
 
 class EventController extends Controller
 {
-    public function getEvents()
+    public function getEvents(Request $request)
     {
-        $events = Event::paginate(2); //Paginate::EVENT
+        $inputed = $request->only('keyword', 'from_date', 'to_date');
+        $events = Event::select('id', 'title', 'date')
+            ->when(!empty($request->keyword), function($q) use($request) {
+                $q->where('title', 'like', "%".$request['keyword']."%");
+            })
+            ->when(!empty($request->from_date), function($q) use($request) {
+                $q->whereDate('date', '>=', $request->from_date);
+            })
+            ->when(!empty($request->to_date), function($q) use($request) {
+                $q->whereDate('date', '<=', $request->to_date);
+            })
+            ->paginate(Paginate::EVENT);
 
         return view('global.events', [
             'events' => $events,
             'current_page' => CurrentPage::EVENT,
+            'inputed' => $inputed,
         ]);
     }
 
@@ -52,6 +64,6 @@ class EventController extends Controller
         // Sync event and event times
         $event->eventTimes()->createMany($request->event_times);
 
-        return redirect()->route('event_list');
+        return redirect()->route('events');
     }
 }
