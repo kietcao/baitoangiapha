@@ -45,11 +45,17 @@
                         @csrf
                         <div class="form-group col-md-8">
                             <label for="title">Tiêu đề <span class="text-danger">(*)</span></label>
-                            <input type="text" name="title" class="form-control" id="title">
+                            <input type="text" name="title" class="form-control" id="title" value="{{old('title')}}">
+                            @error("title")
+                                <div><i class="text-danger">{{ $message }}</i></div>
+                            @enderror
                         </div>
                         <div class="form-group col-md-4">
                             <label for="date">Ngày diễn ra <span class="text-danger">(*)</span></label>
-                            <input type="text" name="date" class="form-control" id="date">
+                            <input type="text" name="date" class="form-control" id="date" value="{{old('date')}}">
+                            @error("date")
+                                <div><i class="text-danger">{{ $message }}</i></div>
+                            @enderror
                         </div>
                         <div class="form-group col-md-12">
                             <label for="date">Thời gian sự kiện</label>
@@ -108,52 +114,40 @@
                                         </th>
                                     </thead>
                                     <tbody>
+                                        @foreach($members as $member)
                                         <tr>
                                             <td class="text-left pl-2">
                                                 <div class="wrap-img">
-                                                    <img src="http://localhost/img/members/1686991472.jpg" alt="">
+                                                    <img src="{{$member->avatar}}" alt="{{$member->avatar}}">
                                                 </div>
                                             </td>
-                                            <td class="text-left pl-2"><b>Nguyễn Văn A</b></td>
-                                            <td class="text-left pl-2">21</td>
-                                            <td class="text-left pl-2">Nam</td>
-                                            <td class="text-center pl-2">
-                                                <input data-id="1" type="checkbox" class="check-member">
-                                            </td>
-                                        </tr>
-                                        <tr>
+                                            <td class="text-left pl-2"><b>{{$member->fullname}}</b></td>
+                                            <td class="text-left pl-2">{{$member->age()}}</td>
                                             <td class="text-left pl-2">
-                                                <div class="wrap-img">
-                                                    <img src="http://localhost/img/members/1686991472.jpg" alt="">
-                                                </div>
+                                                @if ($member->gender == App\Constants\Gender::MALE)
+                                                Nam
+                                                @else
+                                                Nữ
+                                                @endif
                                             </td>
-                                            <td class="text-left pl-2"><b>Nguyễn Văn A</b></td>
-                                            <td class="text-left pl-2">21</td>
-                                            <td class="text-left pl-2">Nam</td>
                                             <td class="text-center pl-2">
-                                                <input data-id="2" type="checkbox" class="check-member">
+                                                <input data-id={{$member->id}} type="checkbox" class="check-member">
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="text-left pl-2">
-                                                <div class="wrap-img">
-                                                    <img src="http://localhost/img/members/1686991472.jpg" alt="">
-                                                </div>
-                                            </td>
-                                            <td class="text-left pl-2"><b>Nguyễn Văn A</b></td>
-                                            <td class="text-left pl-2">21</td>
-                                            <td class="text-left pl-2">Nam</td>
-                                            <td class="text-center pl-2">
-                                                <input data-id="3" type="checkbox" class="check-member">
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
+                                @error("join_members")
+                                    <div><i class="text-danger">{{ $message }}</i></div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-12 pt-2">
                             <label for="detail">Chi tiết sự kiện</label>
                             <textarea name="detail" id="detail"></textarea>
+                            @error("detail")
+                                <div><i class="text-danger">{{ $message }}</i></div>
+                            @enderror
                         </div>
                         <div class="col-md-12 pt-3 text-center">
                             <button class="btn btn-success btn-lg">Tạo mới sự kiện</button>
@@ -179,6 +173,7 @@
         });
         $('#check-all *, #member-join-table tr input').click(function(e){
             e.stopPropagation();
+            setJoinMemberIds();
         });
         $('#check-all input').change(function(){
             let isCheckedAll = $(this).is(':checked');
@@ -192,7 +187,8 @@
         });
         $('#member-join-table tr').click(function(e){
             let isChecked = $(this).find('input').is(":checked");
-            $(this).find('input').prop('checked', !isChecked)
+            $(this).find('input').prop('checked', !isChecked);
+            setJoinMemberIds();
         });
         let beginIndexET = 0;
         $('#add-event-times').click(function(e){
