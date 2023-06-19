@@ -25,7 +25,7 @@
                             <button class="btn btn-info mt-4">Tìm kiếm</button>
                         </div>
                         <div class="form-group col-md-2 pt-2 text-right">
-                            <a href="asd" class="btn btn-success mt-4">Tạo sự kiện</a>
+                            <a href="{{route('create_event_view')}}" class="btn btn-success mt-4">Tạo sự kiện</a>
                         </div>
                     </div>
                 </div>
@@ -35,24 +35,28 @@
                             <th>#ID</th>
                             <th>Tên sự kiện</th>
                             <th>Ngày diễn ra</th>
-                            <th>Ngày tạo</th>
                             <th>Số thành viên</th>
                             <th>Thao tác</th>
                         </thead>
                         <tbody>
+                            @foreach($events as $event)
                             <tr>
-                                <td>1</td>
-                                <td>Đám giỗ</td>
-                                <td>12-05-2022</td>
-                                <td>12-05-2022</td>
-                                <td>100</td>
+                                <td>{{$event->id}}</td>
+                                <td>{{$event->title}}</td>
+                                <td>{{date('d-m-Y', strtotime($event->date))}}</td>
+                                <td>{{$event->eventsMembers->count()}}</td>
                                 <td>
                                     <button class="btn btn-sm btn-warning">Sửa</button>
-                                    <button class="btn btn-sm btn-danger">Xóa</button>
+                                    <form action="" class="d-inline-block" method="post">
+                                        @csrf
+                                        <button class="btn btn-sm btn-danger">Xóa</button>
+                                    </form>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
+                    <div class="pt-md-4 d-flex justify-content-center">{{$events->links()}}</div>
                 </div>
             </div>
         </div>

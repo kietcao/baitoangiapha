@@ -44,6 +44,8 @@ Route::group(['middleware' => ['auth-admin']], function() {
     Route::post('mypage/update-password', [AuthController::class, 'changePassword'])->name('mypage.update_password');
     Route::get('events', [EventController::class, 'getEvents'])->name('event_list');
     Route::post('create-event', [EventController::class, 'store'])->name('create_event');
+    Route::get('create-event', [EventController::class, 'create'])->name('create_event_view');
+    Route::post('events', [EventController::class, 'getEvents'])->name('create_event');
 
     Route::post('logout', [AuthController::class, 'logoutUser'])->name('logout_user');
 });

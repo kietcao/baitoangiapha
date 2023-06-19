@@ -14,11 +14,19 @@ class EventController extends Controller
 {
     public function getEvents()
     {
-        $events = Event::paginate(Paginate::EVENT);
+        $events = Event::paginate(2); //Paginate::EVENT
+
+        return view('global.events', [
+            'events' => $events,
+            'current_page' => CurrentPage::EVENT,
+        ]);
+    }
+
+    public function create()
+    {
         $members = FamilyMember::all();
 
         return view('global.create_event', [
-            'events' => $events,
             'members' => $members,
             'current_page' => CurrentPage::EVENT,
         ]);
