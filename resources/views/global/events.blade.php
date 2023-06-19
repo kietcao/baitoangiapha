@@ -47,7 +47,7 @@
                                 <td>{{date('d-m-Y', strtotime($event->date))}}</td>
                                 <td>{{$event->eventsMembers->count()}}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-warning">Sửa</button>
+                                    <a href="{{route('edit_event_view', ['id' => $event->id])}}" class="btn btn-sm btn-warning">Sửa</a>
                                     <form action="" class="d-inline-block" method="post">
                                         @csrf
                                         <button class="btn btn-sm btn-danger">Xóa</button>
