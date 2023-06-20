@@ -30,6 +30,9 @@ class FamilyMember extends Model
         'mid',
         'fid',
         'user_id',
+        'cccd_number',
+        'cccd_image_before',
+        'cccd_image_after',
         'created_at',
         'updated_at',
     ];

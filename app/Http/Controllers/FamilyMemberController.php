@@ -60,6 +60,11 @@ class FamilyMemberController extends Controller
         $current = FamilyMember::find($request->from_member_id);
         $avatar = $this->storePublicImage($request->file('avatar'));
 
+        if ($request->has('cccd_image_before') && $request->has('cccd_image_after')) {
+            $cccdImageBefore = $this->storeCCCD($request->file('cccd_image_before'));
+            $cccdImageAfter = $this->storeCCCD($request->file('cccd_image_after'));
+        }
+
         if ($relation == Relation::CHILD) {
             if ($current->gender == Gender::MALE) {
                 $fatherId = $current->id;
@@ -88,6 +93,9 @@ class FamilyMemberController extends Controller
                 'gender' => $request->gender,
                 'position_index' => $request->position_index,
                 'avatar' => $avatar,
+                'cccd_image_before' => $cccdImageBefore,
+                'cccd_image_after' => $cccdImageAfter,
+                'cccd_number' => $request->cccd_number,
                 'fid' => $fatherId,
                 'mid' => $motherId,
             ];
@@ -106,6 +114,9 @@ class FamilyMemberController extends Controller
                 'story' => $request->story,
                 'gender' => $current->gender == Gender::MALE ? Gender::FEMALE : Gender::MALE,
                 'avatar' => $avatar,
+                'cccd_image_before' => $cccdImageBefore,
+                'cccd_image_after' => $cccdImageAfter,
+                'cccd_number' => $request->cccd_number,
                 'pids' => $request->from_member_id,
             ];
 
@@ -138,6 +149,14 @@ class FamilyMemberController extends Controller
             $this->removeImage($member->avatar);
             $avatar = $this->storePublicImage($request->file('avatar'));
             $member->avatar = $avatar;
+        }
+
+        if ($request->has('cccd_image_before')) {
+            $member->cccd_image_before = $this->storeCCCD($request->file('cccd_image_before'));
+        }
+
+        if ($request->has('cccd_image_after')) {
+            $member->cccd_image_after = $this->storeCCCD($request->file('cccd_image_after'));
         }
 
         if (!empty($member->position_index)) {

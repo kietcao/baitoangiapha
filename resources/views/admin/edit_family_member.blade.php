@@ -91,6 +91,49 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-12">
+                            <label for="cccd_number">Mã căn cước <span>(*)</span></label>
+                            <input type="text" class="form-control" name="cccd_number" id="cccd_number" value="{{old('cccd_number', $member->cccd_number)}}">
+                            @error('cccd_number')
+                                <i class="text-danger">{{$message}}</i>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cccd_image_before">Mặt trước CCCD <span>(*)</span></label>
+                            <div class="wrap-cccd">
+                                <img
+                                    @if (!empty($member->cccd_image_before))
+                                    src={{route('get_cccd', $member->cccd_image_before)}}
+                                    @else
+                                    src="img/fixed/before_cccd_default.jpg"
+                                    @endif
+                                    alt="before"
+                                    class="w-100"
+                                >
+                                <input type="file" class="form-control" name="cccd_image_before" id="cccd_image_before">
+                            </div>
+                            @error('cccd_image_before')
+                                <i class="text-danger">{{$message}}</i>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cccd_image_after">Mặt sau CCCD <span>(*)</span></label>
+                            <div class="wrap-cccd">
+                                <img
+                                    @if (!empty($member->cccd_image_after))
+                                    src={{route('get_cccd', $member->cccd_image_after)}}
+                                    @else
+                                    src="img/fixed/after_cccd_default.jpg"
+                                    @endif
+                                    alt="before"
+                                    class="w-100"
+                                >
+                                <input type="file" class="form-control" name="cccd_image_after" id="cccd_image_after">
+                            </div>
+                            @error('cccd_image_after')
+                                <i class="text-danger">{{$message}}</i>
+                            @enderror
+                        </div>
+                        <div class="form-group col-md-12">
                             <label for="email">Email</label>
                             <input class="form-control" type="text" name="email" id="email" value="{{old('email', $member->email)}}">
                             @error('email')
@@ -142,6 +185,17 @@
 
             reader.onload = function(e) {
                 $('.wrap-input-avatar img').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(file);
+        });
+        $('.wrap-cccd').find('input').change(function(){
+            var file = event.target.files[0];
+            var reader = new FileReader();
+            let _this = $(this);
+
+            reader.onload = function(e) {
+                _this.closest('.form-group').find('img').attr('src', e.target.result);
             };
 
             reader.readAsDataURL(file);
