@@ -5,7 +5,9 @@
     @include('admin.head')
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" id="main">
+    <aside class="control-sidebar control-sidebar-dark">
+    </aside>
     <div class="wrapper">
         @include('global.preloader')
         @include('admin.navbar')
@@ -13,8 +15,6 @@
         @include('admin.js_vendor')
         @yield('content')
         @include('global.footer')
-        <aside class="control-sidebar control-sidebar-dark">
-        </aside>
     </div>
 </body>
 </html>

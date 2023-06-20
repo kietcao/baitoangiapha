@@ -26,6 +26,8 @@
 <script src="vendor/adminlte/plugins/summernote/summernote-bs4.min.js"></script>
 <!-- overlayScrollbars -->
 <script src="vendor/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- Custom UI -->
+<script src="js/custom_ui.js"></script>
 <!-- AdminLTE App -->
 <script src="vendor/adminlte/dist/js/adminlte.js"></script>
 <script src="vendor/adminlte/dist/js/demo.js"></script>
