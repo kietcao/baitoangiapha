@@ -99,7 +99,7 @@
                         <div class="col-md-12">
                             <label for="">Thành viên tham dự <span class="text-danger">(*)</span></label>
                             <div class="p-2">
-                                <input type="hidden" name="join_members" id="join_members">
+                                <input type="hidden" name="join_members" id="join_members" value="{{old('join_members')}}">
                                 <table class="w-100" id="member-join-table">
                                     <thead>
                                         <th class="pl-2 pr-2 pb-2 w-20 text-left">Ảnh đại diện</th>
@@ -154,7 +154,7 @@
                         </div>
                         <div class="col-md-12 pt-2">
                             <label for="detail">Chi tiết sự kiện</label>
-                            <textarea name="detail" id="detail"></textarea>
+                            <textarea name="detail" id="detail">{{old('detail')}}</textarea>
                             @error("detail")
                                 <div><i class="text-danger">{{ $message }}</i></div>
                             @enderror

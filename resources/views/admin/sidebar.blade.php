@@ -80,6 +80,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{route('event_list')}}" class="nav-link @if($current_page == App\Constants\CurrentPage::EVENT){{'active'}}@endif">
+                        <i class="nav-icon fas fa-calendar-week"></i>
+                        <p>
+                            Quản lý sự kiện
+                        </p>
+                    </a>
+                </li>
                 @if (auth()->user()->user_type == App\Constants\UserType::ADMIN)
                 <li class="nav-item">
                     <a href="{{route('users')}}" class="nav-link @if($current_page == App\Constants\CurrentPage::USER){{'active'}}@endif">
@@ -90,14 +98,6 @@
                     </a>
                 </li>
                 @endif
-                <li class="nav-item">
-                    <a href="{{route('event_list')}}" class="nav-link @if($current_page == App\Constants\CurrentPage::EVENT){{'active'}}@endif">
-                        <i class="nav-icon fas fa-calendar-week"></i>
-                        <p>
-                            Quản lý sự kiện
-                        </p>
-                    </a>
-                </li>
                 <li class="nav-header">Tài khoản</li>
                 <li class="nav-item">
                     <a href="{{route('mypage')}}" class="nav-link @if($current_page == App\Constants\CurrentPage::MYPAGE){{'active'}}@endif">

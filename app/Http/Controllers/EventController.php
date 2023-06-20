@@ -102,4 +102,14 @@ class EventController extends Controller
         $event->eventTimes()->createMany($request->event_times);
         return redirect()->back()->with('message', 'Cập nhật thành công !');
     }
+
+    public function delete(Request $request)
+    {
+        $event = Event::findOrFail($request->id);
+        $event->eventTimes()->delete();
+        $event->eventsMembers()->detach();
+        $event->delete();
+
+        return redirect()->back()->with('message', 'Đã xoá event ' . $event->title);
+    }
 }
