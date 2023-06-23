@@ -76,7 +76,7 @@
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Gia phả
-                            <span class="right badge badge-danger">1</span>
+                            <span class="right badge badge-danger">{{$family_member_count}}</span>
                         </p>
                     </a>
                 </li>
