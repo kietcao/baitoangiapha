@@ -35,6 +35,19 @@
 <script src="vendor/adminlte/dist/js/pages/dashboard.js"></script>
 <!-- CKEditor -->
 <script src="vendor/ckeditor4/ckeditor.js"></script>
+<!-- CKFinder -->
+<script src="vendor/ckfinder/ckfinder.js"></script>
+<script>
+  const configCkeditor = {
+    height: 400,
+    filebrowserBrowseUrl: 'vendor/ckfinder/ckfinder.php',
+    filebrowserImageBrowseUrl: 'vendor/ckfinder/ckfinder.php?type=Images',
+    filebrowserFlashBrowseUrl: 'vendor/ckfinder/ckfinder.php?type=Flash',
+    filebrowserUploadUrl: 'vendor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+    filebrowserImageUploadUrl: 'vendor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+    filebrowserFlashUploadUrl: 'vendor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+  }
+</script>
 <!-- Datatable -->
 <script src="vendor/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="vendor/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

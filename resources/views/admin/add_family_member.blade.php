@@ -237,9 +237,7 @@
         </div>
     </section>
     <script>
-        let editor = CKEDITOR.replace('story', {
-            height: 400
-        });
+        let editor = CKEDITOR.replace('story', configCkeditor);
         $( "[name=birthday]" ).datepicker({
             dayNamesMin: [ "T2", "T3", "T4", "T5", "T6", "T7", "CN" ],
             monthNames: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],

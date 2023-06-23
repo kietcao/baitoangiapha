@@ -34,6 +34,8 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         if (Auth::attempt($request->only('email', 'password'))) {
+            session_start();
+            $_SESSION['enable_status'] = Auth::user()->enable_status;
             return redirect()->route('dashboard');
         }
 

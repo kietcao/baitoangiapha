@@ -168,9 +168,7 @@
         </div>
     </section>
     <script>
-        let editor = CKEDITOR.replace('detail', {
-            height: 400
-        });
+        let editor = CKEDITOR.replace('detail', configCkeditor);
         $('#member-join-table').DataTable({
             scrollY: '350px',
             scrollCollapse: true,

@@ -3,6 +3,7 @@
 /public/storage
 /public/img/family_member
 /public/img/members
+/public/ckfinder
 /storage/*.key
 /vendor
 .env
