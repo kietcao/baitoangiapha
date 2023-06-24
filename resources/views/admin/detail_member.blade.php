@@ -5,6 +5,65 @@
     @include('global.content_head', [
         'title' => 'Thông tin của ' . $member->fullname
     ])
+    <style>
+        @media screen and (max-width: 1440px) {
+            .wrap-image div {
+                left: 0;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            .wrap-image div {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .wrap-content {
+                padding: 0;
+                text-align: center;
+                padding-top: 30px;
+            }
+
+            .wrap-relations {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .relation-member-item {
+                padding: 15px;
+            }
+        }
+
+        @media screen and (max-width: 986px) {
+            .col-left {
+                order: 2;
+            }
+
+            .col-right {
+                order: 1;
+            }
+
+            .relation-member-item {
+                padding: 10px;
+            }
+        }
+
+        @media screen and (max-width: 425px) {
+            .relation-member-item {
+                padding: 6px;
+            }
+            .full-name {
+                font-size: 30px;
+            }
+            .role-name {
+                font-size: 18px;
+            }
+
+            .info-item {
+                font-size: 15px;
+            }
+        }
+    </style>
     <section class="content">
         <div class="container-fluid">
             <div class="card mb-0 card-info">
@@ -14,7 +73,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-8">
+                        <div class="col-lg-8 col-left">
                             <div class="wrap-content">
                                 <div class="role-name">{{$member->role_name}}</div>
                                 <div class="full-name">{{$member->fullname}}</div>
@@ -105,7 +164,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-lg-4 col-right">
                             <div class="wrap-image m-auto">
                                 <img src="{{$member->avatar}}" alt="{{$member->avatar}}">
                                 <div>{{$member->fullname}} - {{$member->age()}} tuổi</div>

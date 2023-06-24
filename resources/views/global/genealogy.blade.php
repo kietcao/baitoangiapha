@@ -172,6 +172,7 @@
 
         if ($(window).width() <= 500) {
             FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.john);
+            FamilyTree.templates.myTemplate.size = [120, 185];
             FamilyTree.templates.myTemplate.field_1 = `<text data-width="230" style="font-size: 12px;" fill="#000000ab" x="60" y="155" text-anchor="middle">Ngày sinh: {val}</text>`;
             FamilyTree.templates.myTemplate.field_2 = `<text data-width="230" style="font-size: 12px;" fill="#000000ab" x="60" y="175" text-anchor="middle">Ngày mất: {val}</text>`;
         } else {
