@@ -37,15 +37,6 @@
             background: rgba(8, 8, 8, 0.144)!important;
         }
 
-        @media screen and (max-width: 978px) {
-            .event-time-item .col-md-4 .d-flex.align-items-center {
-                flex-direction: column;
-            }
-            .event-time-item .col-md-4 .d-flex.align-items-center .pl-1.pr-1 {
-                display: none;
-            }
-        }
-
         @media screen and (max-width: 768px) {
             #member-join-table_wrapper .col-gender,
             #member-join-table_wrapper .col-age {
