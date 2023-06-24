@@ -36,6 +36,22 @@
         #member-join-table tr:hover {
             background: rgba(8, 8, 8, 0.144)!important;
         }
+
+        @media screen and (max-width: 978px) {
+            .event-time-item .col-md-4 .d-flex.align-items-center {
+                flex-direction: column;
+            }
+            .event-time-item .col-md-4 .d-flex.align-items-center .pl-1.pr-1 {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            #member-join-table_wrapper .col-gender,
+            #member-join-table_wrapper .col-age {
+                display: none;   
+            }
+        }
     </style>
     <section class="content">
         <div class="container-fluid">
@@ -104,8 +120,8 @@
                                     <thead>
                                         <th class="pl-2 pr-2 pb-2 w-20 text-left">Ảnh đại diện</th>
                                         <th class="pl-2 pr-2 pb-2 w-20 text-left">Tên thành viên</th>
-                                        <th class="pl-2 pr-2 pb-2 w-20 text-left">Tuổi</th>
-                                        <th class="pl-2 pr-2 pb-2 w-20 text-left">Giới tính</th>
+                                        <th class="pl-2 pr-2 pb-2 w-20 text-left col-age">Tuổi</th>
+                                        <th class="pl-2 pr-2 pb-2 w-20 text-left col-gender">Giới tính</th>
                                         <th class="pl-2 pr-2 pb-2 w-20 text-left">
                                             <div class="d-flex align-items-center" id="check-all">
                                                 <div class="pr-2"><label for="check-all-input">Chọn tất cả</label></div>
@@ -125,8 +141,8 @@
                                                 </div>
                                             </td>
                                             <td class="text-left pl-2"><b>{{$member->fullname}}</b></td>
-                                            <td class="text-left pl-2">{{$member->age()}}</td>
-                                            <td class="text-left pl-2">
+                                            <td class="text-left pl-2 col-age">{{$member->age()}}</td>
+                                            <td class="text-left pl-2 col-gender">
                                                 @if ($member->gender == App\Constants\Gender::MALE)
                                                 Nam
                                                 @else

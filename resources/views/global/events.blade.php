@@ -4,6 +4,21 @@
     @include('global.content_head', [
         'title' => 'Quản lý sự kiện'
     ])
+    <style>
+        @media screen and (max-width: 576px) {
+            .col-member-count {
+                display: none;
+            }
+            .col-event-id {
+                display: none;
+            }
+            
+            .col-event-date {
+                display: none;
+            }
+        }
+        
+    </style>
     <section class="content">
         <div class="container-fluid">
             @if (session('message'))
@@ -13,7 +28,6 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    {{old('keyword')}}
                     <form class="row" action="{{route('events')}}" method="get" enctype="multipart/form-data">
                         <div class="form-group col-md-3">
                             <label for="">Tên sự kiện</label>
@@ -38,19 +52,19 @@
                 <div class="card-body">
                     <table class="table">
                         <thead class="bg-info">
-                            <th>#ID</th>
+                            <th class="col-event-id">#ID</th>
                             <th>Tên sự kiện</th>
-                            <th>Ngày diễn ra</th>
-                            <th>Số thành viên</th>
+                            <th class="col-event-date">Ngày diễn ra</th>
+                            <th class="col-member-count">Số thành viên</th>
                             <th>Thao tác</th>
                         </thead>
                         <tbody>
                             @foreach($events as $event)
                             <tr>
-                                <td>{{$event->id}}</td>
+                                <td class="col-event-id">{{$event->id}}</td>
                                 <td>{{$event->title}}</td>
-                                <td>{{date('d-m-Y', strtotime($event->date))}}</td>
-                                <td>{{$event->eventsMembers->count()}}</td>
+                                <td class="col-event-date">{{date('d-m-Y', strtotime($event->date))}}</td>
+                                <td class="col-member-count">{{$event->eventsMembers->count()}}</td>
                                 <td>
                                     <a href="{{route('edit_event_view', ['id' => $event->id])}}" class="btn btn-sm btn-warning">Sửa</a>
                                     <button data-toggle="modal" data-target="#delete-event-modal" data-id="{{$event->id}}" class="btn btn-sm btn-danger delete-event">Xóa</button>
