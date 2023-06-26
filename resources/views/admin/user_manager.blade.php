@@ -17,6 +17,27 @@
         #users-table td{
             vertical-align: middle;
         }
+
+        @media screen and (max-width: 1025px) {
+            .col-avatar,
+            .col-email {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 628px) {
+            #users-table_wrapper button,
+            #users-table_wrapper a,
+            #users-table_wrapper div
+            {
+                font-size: 13.5px!important;
+                text-align: center;
+            }
+
+            .btn-sm {
+                padding: 2px!important;
+            }
+        }
     </style>
     <div class="content-wrapper">
         @include('global.content_head', [
@@ -32,9 +53,9 @@
                         <table class="table data-table" id="users-table">
                             <thead class="bg-info">
                                 <tr>
-                                    <th>Avatar</th>
+                                    <th class="col-avatar">Avatar</th>
                                     <th>Họ tên</th>
-                                    <th>Email</th>
+                                    <th class="col-email">Email</th>
                                     <th>Loại User</th>
                                     <th>Trạng thái</th>
                                     <th>Thao tác</th>
@@ -47,7 +68,7 @@
                                     class="bg-warning"
                                     @endif
                                 >
-                                    <td>
+                                    <td class="col-avatar">
                                         <div class="wrap-avatar">
                                             <img
                                                 @if (!empty($user->avatar))
@@ -60,7 +81,7 @@
                                         </div>
                                     </td>
                                     <td>{{$user->name}}</td>
-                                    <td>{{$user->email}}</td>
+                                    <td class="col-email">{{$user->email}}</td>
                                     <td>
                                         @if ($user->user_type == App\Constants\UserType::ADMIN)
                                         Admin
@@ -108,7 +129,7 @@
             "searching": true,
             "ordering": true,
             "info": true,
-            "autoWidth": true,
+            "autoWidth": false,
             "responsive": true,
         });
 

@@ -13,6 +13,12 @@
         .wrap-cccd img {
             width: 100%;
         }
+
+        @media screen and (max-width: 426px) {
+            .wrap-cccd {
+                width: 100%;
+            }
+        }
     </style>
     <section class="content">
         <div class="container-fluid">
