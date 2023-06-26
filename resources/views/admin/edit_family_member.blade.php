@@ -30,20 +30,25 @@
             }
         </style>
         <div class="container-fluid">
+            @if (session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
             <div class="card">
                 <div class="card-body">
                     <form action="{{route('update_family_member')}}" method="post" enctype="multipart/form-data" class="row">
                         @csrf
                         <input type="hidden" name="id" value="{{$member->id}}">
                         <div class="form-group col-md-6">
-                            <label for="fullname">Họ tên</label>
+                            <label for="fullname">Họ tên <span class="text-danger">(*)</span></label>
                             <input class="form-control" type="text" name="fullname" id="fullname" value="{{old('fullname', $member->fullname)}}">
                             @error('fullname')
                                 <i class="text-danger">{{$message}}</i>
                             @enderror
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="role_name">Tên vai trò</label>
+                            <label for="role_name">Tên vai trò <span class="text-danger">(*)</span></label>
                             <input class="form-control" type="text" name="role_name" id="role_name" value="{{old('role_name', $member->role_name)}}">
                             @error('role_name')
                                 <i class="text-danger">{{$message}}</i>
@@ -54,7 +59,7 @@
                             <div class="wrap-input-avatar">
                                 <input class="form-control" type="file" name="avatar" id="avatar" accept="image/*">
                                 <img
-                                    src="{{old('avatar', $member->avatar)}}"
+                                    src="{{$member->avatar ?? 'img/fixed/default_avatar.png'}}"
                                     alt=""
                                 >
                             </div>
@@ -63,7 +68,7 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="birthday">Ngày sinh</label>
+                            <label for="birthday">Ngày sinh <span class="text-danger">(*)</span></label>
                             <input class="form-control" type="text" name="birthday" id="birthday" value="{{old('birthday', $member->birthday)}}">
                             @error('birthday')
                                 <i class="text-danger">{{$message}}</i>
@@ -179,13 +184,11 @@
 
         $('.wrap-input-avatar input').change(function(event) {
             var file = event.target.files[0];
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                $('.wrap-input-avatar img').attr('src', e.target.result);
-            };
-
-            reader.readAsDataURL(file);
+            let url = 'img/fixed/default_avatar.png';
+            if (file) {
+                url = URL.createObjectURL(file);
+            }
+            $('.wrap-input-avatar img').attr('src', url);
         });
         $('.wrap-cccd').find('input').change(function(){
             var file = event.target.files[0];

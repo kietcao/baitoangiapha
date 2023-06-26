@@ -149,6 +149,9 @@ class FamilyMemberController extends Controller
             $this->removeImage($member->avatar);
             $avatar = $this->storePublicImage($request->file('avatar'));
             $member->avatar = $avatar;
+        } else {
+            $this->removeImage($member->avatar);
+            $member->avatar = null;
         }
 
         if ($request->has('cccd_image_before')) {
@@ -164,6 +167,7 @@ class FamilyMemberController extends Controller
         }
 
         $member->fullname = $request->fullname;
+        $member->cccd_number = $request->cccd_number;
         $member->role_name = $request->role_name;
         $member->birthday = $request->birthday;
         $member->leaveday = $request->leaveday;
@@ -173,7 +177,7 @@ class FamilyMemberController extends Controller
         $member->story = $request->story;
         $member->save();
 
-        return redirect()->back();
+        return redirect()->back()->with(['message' => 'Cập nhật thông tin thành công !']);
     }
 
     public function detailMember($id)

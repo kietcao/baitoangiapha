@@ -67,7 +67,7 @@ class UpdateFamilyMemberRequest extends FormRequest
             'email.email' => ':Attribute sai định dạng',
             'email.max' => ':Attribute tối đa :max ký tự',
 
-            'phone.digits_between' => ':Attribute từ :digits_between ký tự',
+            'phone.digits_between' => ':Attribute từ [8~13] ký tự',
 
             'gender.required' => 'Vui lòng điền :attribute',
             'gender.digits_between' => ':Attribute trong phạm vi [:digits_between]',

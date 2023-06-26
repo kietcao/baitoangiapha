@@ -82,21 +82,21 @@
                             </select>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="fullname">Họ tên</label>
+                            <label for="fullname">Họ tên <span class="text-danger">(*)</span></label>
                             <input class="form-control" type="text" name="fullname" id="fullname" value="{{old('fullname')}}">
                             @error('fullname')
                                 <i class="text-danger">{{$message}}</i>
                             @enderror
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="role_name">Tên vai trò</label>
+                            <label for="role_name">Tên vai trò <span class="text-danger">(*)</span></label>
                             <input class="form-control" type="text" name="role_name" id="role_name" value="{{old('role_name')}}">
                             @error('role_name')
                                 <i class="text-danger">{{$message}}</i>
                             @enderror
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="avatar">Ảnh đại diện</label>
+                            <label for="avatar">Ảnh đại diện <span class="text-danger">(*)</span></label>
                             <div class="wrap-input-avatar">
                                 <input class="form-control" type="file" name="avatar" id="avatar" accept="image/*">
                                 <img
@@ -111,7 +111,7 @@
                         <div class="form-group col-md-6">
                             <div class="row">
                                 <div class="col-md-12 form-group">
-                                    <label for="birthday">Ngày sinh</label>
+                                    <label for="birthday">Ngày sinh <span class="text-danger">(*)</span></label>
                                     <input class="form-control" type="text" name="birthday" id="birthday" value="{{old('birthday')}}">
                                     @error('birthday')
                                         <i class="text-danger">{{$message}}</i>
@@ -141,14 +141,14 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="cccd_number">Mã căn cước <span>(*)</span></label>
+                            <label for="cccd_number">Mã căn cước <span class="text-danger">(*)</span></label>
                             <input type="text" class="form-control" name="cccd_number" id="cccd_number" value="{{old('cccd_number')}}">
                             @error('cccd_number')
                                 <i class="text-danger">{{$message}}</i>
                             @enderror
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="cccd_image_before">Mặt trước CCCD <span>(*)</span></label>
+                            <label for="cccd_image_before">Mặt trước CCCD <span class="text-danger">(*)</span></label>
                             <div class="wrap-cccd">
                                 <img
                                     src="img/fixed/before_cccd_default.jpg"
@@ -162,7 +162,7 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="cccd_image_after">Mặt sau CCCD <span>(*)</span></label>
+                            <label for="cccd_image_after">Mặt sau CCCD <span class="text-danger">(*)</span></label>
                             <div class="wrap-cccd">
                                 <img
                                     src="img/fixed/after_cccd_default.jpg"
@@ -183,7 +183,7 @@
                             @enderror
                         </div>
                         <div class="form-group col-md-4 d-none position_index">
-                            <label for="position_index">Thứ tự</label>
+                            <label for="position_index">Thứ tự <span class="text-danger">(*)</span></label>
                             <input id="position_index" class="form-control" type="text" name="position_index" id="position_index" value="{{old('position_index')}}">
                             @error('position_index')
                                 <i class="text-danger">{{$message}}</i>
@@ -248,8 +248,16 @@
             monthNames: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
             dateFormat: "yy-mm-dd",
         });
+        let relation = {{old('relation', 1)}};
         $('#relation').on('change', function(){
-            if ($(this).val() == 2) {
+            relation = $(this).val();
+            initRelationForm();
+        });
+
+        initRelationForm();
+
+        function initRelationForm() {
+            if (relation == 2) {
                 $('.child_with').removeClass('d-none');
                 $('.position_index').removeClass('d-none');
                 $('.gender').removeClass('d-none');
@@ -258,7 +266,7 @@
                 $('.position_index').addClass('d-none');
                 $('.gender').addClass('d-none');
             }
-        });
+        }
 
         $('.wrap-input-avatar input').change(function(event) {
             var file = event.target.files[0];
