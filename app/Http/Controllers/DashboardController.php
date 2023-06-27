@@ -23,17 +23,20 @@ class DashboardController extends Controller
         $totalMaleFamilyMembers = FamilyMember::where('gender', Gender::MALE)->count();
         $totalFemaleFamilyMembers = FamilyMember::where('gender', Gender::FEMALE)->count();
         $newUsers = User::select('avatar', 'name', 'created_at')->orderBy('created_at', 'desc')->limit(8)->get();
-        $newEvents = Event::whereDate('date', '>', now())->limit(10)->get();
+        $newUsersCount = User::orderBy('created_at', 'desc')->limit(8)->count();
+        $newEvents = Event::whereDate('date', '>', date('Y-m-d'))->limit(5)->get();
         return view('admin.dashboard', [
             'totalFamilyMembers' => $totalFamilyMembers,
             'totalMaleFamilyMembers' => $totalMaleFamilyMembers,
             'totalFemaleFamilyMembers' => $totalFemaleFamilyMembers,
             'newUsers' => $newUsers,
+            'newUsersCount' => $newUsersCount,
             'cpuUsed' => $this->cpuUsage(),
             'cpu' => $hardwareInfo['cpu'] . ' x ' . $hardwareInfo['cpu_count'],
             'totalDisk' => $this->byteToGb($hardwareInfo['disk']['total']),
             'freeDisk' => $this->byteToGb($hardwareInfo['disk']['free']),
             'usedDisk' => $this->byteToGb($hardwareInfo['disk']['total'] - $hardwareInfo['disk']['free']),
+            'newEvents' => $newEvents,
             'current_page' => CurrentPage::DASHBOARD,
         ]);
     }

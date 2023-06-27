@@ -56,7 +56,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">User mới</h3>
                                 <div class="card-tools">
-                                    <span class="badge badge-danger">8 người mới</span>
+                                    <span class="badge badge-danger">{{$newUsersCount}} người mới</span>
                                 </div>
                             </div>
                             <div class="card-body p-0">
@@ -124,12 +124,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($newEvents as $key => $newEvent)
                                             <tr>
-                                                <td>#1</td>
-                                                <td>Đám cưới</td>
-                                                <td>12-02-2022</td>
-                                                <td><span class="badge badge-success">5 người</span></td>
+                                                <td>#{{$key + 1}}</td>
+                                                <td>{{$newEvent->title}}</td>
+                                                <td>{{date('d-m-Y', strtotime($newEvent->date))}}</td>
+                                                <td><span class="badge badge-success">{{$newEvent->eventsMembers()->count()}} người</span></td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
