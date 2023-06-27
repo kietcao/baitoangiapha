@@ -14,8 +14,9 @@
                             <div class="info-box-content">
                                 <span class="info-box-text">CPU Traffic</span>
                                 <span class="info-box-number">
-                                    {{ $cpuInfo['cpu_used'] }}
-                                    <small>%</small>
+                                    <span>{{$cpu}}</span>
+                                    ({{ $cpuUsed }}
+                                    <small>%</small>)
                                 </span>
                             </div>
                         </div>
@@ -25,7 +26,7 @@
                             <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-hdd"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Bộ nhớ</span>
-                                <span class="info-box-number">{{ number_format($diskInfo['total_disk']) }} GB</span>
+                                <span class="info-box-number">{{ number_format($totalDisk) }} GB</span>
                             </div>
                         </div>
                     </div>
@@ -34,7 +35,7 @@
                             <span class="info-box-icon bg-success elevation-1"><i class="far fa-hdd"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Bộ nhớ trống</span>
-                                <span class="info-box-number">{{ number_format($diskInfo['free_disk']) }} GB</span>
+                                <span class="info-box-number">{{ number_format($freeDisk) }} GB</span>
                             </div>
                         </div>
                     </div>
@@ -43,7 +44,7 @@
                             <span class="info-box-icon bg-warning elevation-1"><i class="far fa-hdd"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Chiếm dụng</span>
-                                <span class="info-box-number">{{ number_format($diskInfo['used_disk']) }} GB</span>
+                                <span class="info-box-number">{{ number_format($usedDisk) }} GB</span>
                             </div>
                         </div>
                     </div>

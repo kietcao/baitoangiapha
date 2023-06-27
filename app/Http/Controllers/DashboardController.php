@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use App\Models\FamilyMember;
 use App\Models\User;
 use App\Models\Event;
+use Larinfo;
 
 class DashboardController extends Controller
 {
@@ -17,6 +18,7 @@ class DashboardController extends Controller
 
     public function index()
     {
+        $hardwareInfo = Larinfo::getServerInfoHardware();
         $totalFamilyMembers = FamilyMember::count();
         $totalMaleFamilyMembers = FamilyMember::where('gender', Gender::MALE)->count();
         $totalFemaleFamilyMembers = FamilyMember::where('gender', Gender::FEMALE)->count();
@@ -27,27 +29,21 @@ class DashboardController extends Controller
             'totalMaleFamilyMembers' => $totalMaleFamilyMembers,
             'totalFemaleFamilyMembers' => $totalFemaleFamilyMembers,
             'newUsers' => $newUsers,
-            'diskInfo' => $this->diskInfo(),
-            'cpuInfo' => $this->cpuInfo(),
+            'cpuUsed' => $this->cpuUsage(),
+            'cpu' => $hardwareInfo['cpu'] . ' x ' . $hardwareInfo['cpu_count'],
+            'totalDisk' => $this->byteToGb($hardwareInfo['disk']['total']),
+            'freeDisk' => $this->byteToGb($hardwareInfo['disk']['free']),
+            'usedDisk' => $this->byteToGb($hardwareInfo['disk']['total'] - $hardwareInfo['disk']['free']),
             'current_page' => CurrentPage::DASHBOARD,
         ]);
     }
 
     public function diskInfo()
     {
-        // Disk
-        $totalDisk = disk_total_space(__DIR__);
-        $freeDisk = disk_free_space(__DIR__);
-        $usedDisk = $totalDisk - $freeDisk;
-
-        return [
-            'total_disk' => $this->byteToGb($totalDisk),
-            'free_disk' => $this->byteToGb($freeDisk),
-            'used_disk' => $this->byteToGb($usedDisk),
-        ];
+        
     }
 
-    public function cpuInfo()
+    public function cpuUsage()
     {
         $os = Str::lower(PHP_OS);
 
@@ -61,8 +57,6 @@ class DashboardController extends Controller
             $cpuUsage = isset($matches[1]) ? $matches[1] : 'Unknown';
         }
 
-        return [
-            'cpu_used' => $cpuUsage,
-        ];
+        return $cpuUsage;
     }
 }
