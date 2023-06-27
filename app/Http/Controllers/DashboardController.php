@@ -41,9 +41,9 @@ class DashboardController extends Controller
         $usedDisk = $totalDisk - $freeDisk;
 
         return [
-            'total_disk' => $this->memoryStrFormat($totalDisk),
-            'free_disk' => $this->memoryStrFormat($freeDisk),
-            'used_disk' => $this->memoryStrFormat($usedDisk),
+            'total_disk' => $this->byteToGb($totalDisk),
+            'free_disk' => $this->byteToGb($freeDisk),
+            'used_disk' => $this->byteToGb($usedDisk),
         ];
     }
 
