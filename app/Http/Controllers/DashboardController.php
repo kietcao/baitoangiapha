@@ -36,8 +36,8 @@ class DashboardController extends Controller
     public function diskInfo()
     {
         // Disk
-        $totalDisk = disk_total_space('/');
-        $freeDisk = disk_free_space('/');
+        $totalDisk = disk_total_space(__DIR__);
+        $freeDisk = disk_free_space(__DIR__);
         $usedDisk = $totalDisk - $freeDisk;
 
         return [
