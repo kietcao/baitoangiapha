@@ -124,6 +124,14 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @if (count($newEvents) <= 0)
+                                            <tr>
+                                                <td colspan="4" class="text-center">
+                                                    <div class="pb-2">Không có sự kiện sắp diễn ra</div>
+                                                    <a href="{{route('create_event')}}" class="btn btn-sm btn-info">Tạo sự kiện</a>
+                                                </td>
+                                            </tr>
+                                            @endif
                                             @foreach($newEvents as $key => $newEvent)
                                             <tr>
                                                 <td>#{{$key + 1}}</td>
