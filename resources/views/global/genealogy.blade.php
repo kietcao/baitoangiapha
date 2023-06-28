@@ -172,9 +172,13 @@
 
         if ($(window).width() <= 500) {
             FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.john);
-            FamilyTree.templates.myTemplate.size = [120, 185];
+            FamilyTree.templates.myTemplate.size = [110, 185];
             FamilyTree.templates.myTemplate.field_1 = `<text data-width="230" style="font-size: 12px;" fill="#000000ab" x="60" y="155" text-anchor="middle">Ngày sinh: {val}</text>`;
             FamilyTree.templates.myTemplate.field_2 = `<text data-width="230" style="font-size: 12px;" fill="#000000ab" x="60" y="175" text-anchor="middle">Ngày mất: {val}</text>`;
+            FamilyTree.templates.myTemplate.img_0 =
+            '<clipPath id="ulaImg"><circle cx="60" cy="65" r="40"></circle></clipPath>'
+            + '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="20" y="25" width="80" height="80">'
+            + '</image>';
         } else {
             FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
             FamilyTree.templates.myTemplate.size = [200, 230];
