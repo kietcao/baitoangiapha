@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $totalFemaleFamilyMembers = FamilyMember::where('gender', Gender::FEMALE)->count();
         $newUsers = User::select('avatar', 'name', 'created_at')->orderBy('created_at', 'desc')->limit(8)->get();
         $newUsersCount = User::orderBy('created_at', 'desc')->limit(8)->count();
-        $newEvents = Event::whereDate('date', '>', date('Y-m-d'))->limit(5)->get();
+        $newEvents = Event::whereDate('date', '>', date('Y-m-d'))->orderBy('date', 'asc')->limit(5)->get();
         return view('admin.dashboard', [
             'totalFamilyMembers' => $totalFamilyMembers,
             'totalMaleFamilyMembers' => $totalMaleFamilyMembers,

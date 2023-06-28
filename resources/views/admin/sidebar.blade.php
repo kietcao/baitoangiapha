@@ -81,6 +81,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('genealogy')}}" class="nav-link">
+                        <i class="nav-icon fas fa-users-cog"></i>
+                        <p>
+                            Cấu hình cây gia phả (demo)
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('event_list')}}" class="nav-link @if($current_page == App\Constants\CurrentPage::EVENT){{'active'}}@endif">
                         <i class="nav-icon fas fa-calendar-week"></i>
                         <p>
