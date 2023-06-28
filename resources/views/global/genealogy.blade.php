@@ -82,7 +82,7 @@
     </style>
     <div class="content-wrapper">
         @include('global.content_head', [
-            'title' => 'Genealogy',
+            'title' => 'Cây gia phả',
         ])
         <section class="content">
             <div class="container-fluid">

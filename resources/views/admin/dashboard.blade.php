@@ -62,7 +62,7 @@
                             <div class="card-body p-0">
                                 <ul class="users-list clearfix">
                                     @foreach ($newUsers as $user)
-                                    <li>
+                                    <li class="p-4">
                                         <img
                                             @if (!empty($user->avatar))
                                                 src="{{$user->avatar}}"
@@ -71,7 +71,7 @@
                                             @endif
                                             alt="{{$user->id}}"
                                         >
-                                        <a class="users-list-name" href="#">Alexander Pierce</a>
+                                        <a class="users-list-name pt-2" href="#">{{$user->name}}</a>
                                         <span class="users-list-date">{{$user->created_at->diffForHumans()}}</span>
                                     </li>
                                     @endforeach
@@ -87,21 +87,21 @@
                             <span class="info-box-icon"><i class="fas fa-users"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Tổng thành viên cây</span>
-                                <span class="info-box-number">{{number_format($totalFamilyMembers)}}</span>
+                                <span class="info-box-number">{{number_format($totalFamilyMembers)}} người</span>
                             </div>
                         </div>
                         <div class="info-box mb-3 bg-success">
                             <span class="info-box-icon"><i class="fas fa-male"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Tổng thành viên nam</span>
-                                <span class="info-box-number">{{number_format($totalMaleFamilyMembers)}}</span>
+                                <span class="info-box-number">{{number_format($totalMaleFamilyMembers)}} người</span>
                             </div>
                         </div>
                         <div class="info-box mb-3 bg-info">
                             <span class="info-box-icon"><i class="fas fa-female"></i></span>
                             <div class="info-box-content">
                                 <span class="info-box-text">Tổng thành viên nữ</span>
-                                <span class="info-box-number">{{number_format($totalFemaleFamilyMembers)}}</span>
+                                <span class="info-box-number">{{number_format($totalFemaleFamilyMembers)}} người</span>
                             </div>
                         </div>
                     </div>
