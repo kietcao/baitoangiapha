@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -14,7 +15,7 @@
     <div class="container register">
         <div class="row">
             <div class="col-md-3 register-left">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Logo.min.svg/2560px-Logo.min.svg.png" alt="logo" />
+                <img src="img/fixed/logo.png" alt="logo" />
                 <h3>Welcome</h3>
                 <p>Đăng nhập hệ thống quản lý gia phả</p>
                 <a href="{{route('register_view')}}" class="btnLogin">Đăng ký</a>
