@@ -2,10 +2,12 @@
 <html lang="en">
 
 <head>
+    <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Đăng ký thành viên</title>
+    <link rel="icon" type="image/x-icon" href="img/fixed/logo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <link rel="stylesheet" href="css/auth_css_1.css">

@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gia Phả | Dashboard</title>
-<link rel="icon" type="image/x-icon" href="https://laravel.com/img/logomark.min.svg">
+<link rel="icon" type="image/x-icon" href="img/fixed/logo.png">
 
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet"
