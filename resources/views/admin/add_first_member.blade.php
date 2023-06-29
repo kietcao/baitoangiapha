@@ -43,6 +43,8 @@
                 <div class="card-body">
                     <form action="{{route('add_first_member')}}" method="post" enctype="multipart/form-data" class="row">
                         @csrf
+                        <input type="hidden" name="family_tree_title">
+                        <input type="hidden" name="family_tree_template_id">
                         <div class="form-group col-md-6">
                             <label for="fullname">Họ tên</label>
                             <input class="form-control" type="text" name="fullname" id="fullname" value="{{old('fullname')}}">

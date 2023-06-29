@@ -2,7 +2,7 @@
 @section('content')
     <div class="content-wrapper">
         @include('global.content_head', [
-            'title' => 'Tempate',
+            'title' => 'Cấu hình cây',
         ])
         <style>
             .card-template {
@@ -55,9 +55,9 @@
                             <div class="col-md-3 item-template" data-id="1">
                                 <div class="card-template">
                                     <div class="wrap-img">
-                                        <img class="w-100" src="https://scontent.fsgn5-14.fna.fbcdn.net/v/t1.15752-9/353817888_134408652972681_3776615963331717005_n.png?_nc_cat=106&ccb=1-7&_nc_sid=ae9488&_nc_ohc=JHN6tPB_bfEAX_mtvWe&_nc_ht=scontent.fsgn5-14.fna&oh=03_AdSbfMykMUdriztV473iQ4Tnfu2pGMShpMQ9do8lX6FQXQ&oe=64C373E0" alt="">
+                                        <img class="w-100" src="img/fixed/template_1.jpg" alt="template_1">
                                     </div>
-                                    <div class="template-title">Template phượng</div>
+                                    <div class="template-title">Mặc định</div>
                                     <input type="radio" checked>
                                 </div>
                             </div>

@@ -72,19 +72,19 @@
                     </ul> --}}
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('themes')}}" class="nav-link @if($current_page == App\Constants\CurrentPage::THEMES){{'active'}}@endif">
+                        <i class="nav-icon fas fa-users-cog"></i>
+                        <p>
+                            Cấu hình cây
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('genealogy')}}" class="nav-link @if($current_page == App\Constants\CurrentPage::GENEALOGY){{'active'}}@endif">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
                             Gia phả
                             <span class="right badge badge-danger">{{$family_member_count}}</span>
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('themes')}}" class="nav-link @if($current_page == App\Constants\CurrentPage::THEMES){{'active'}}@endif">
-                        <i class="nav-icon fas fa-users-cog"></i>
-                        <p>
-                            Cấu hình cây gia phả (demo)
                         </p>
                     </a>
                 </li>
