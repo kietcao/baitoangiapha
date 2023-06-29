@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth-admin']], function() {
     Route::post('edit-event/{id}', [EventController::class, 'update'])->name('edit_event');
     Route::post('events', [EventController::class, 'getEvents'])->name('events');
     Route::post('event/delete', [EventController::class, 'delete'])->name('delete_event');
+    Route::get('genealogy/themes', [FamilyMemberController::class, 'themes'])->name('themes');
 
     Route::post('logout', [AuthController::class, 'logoutUser'])->name('logout_user');
 });

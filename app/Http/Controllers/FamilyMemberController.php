@@ -224,4 +224,11 @@ class FamilyMemberController extends Controller
         $member->delete();
         return redirect()->back();
     }
+
+    public function themes()
+    {
+        return view('global.themes', [
+            'current_page' => CurrentPage::THEMES,
+        ]);
+    }
 }

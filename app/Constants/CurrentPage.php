@@ -9,4 +9,6 @@ final class CurrentPage
     const USER = 3;
     const MYPAGE = 4;
     const EVENT = 5;
+
+    const THEMES = 6;
 }
