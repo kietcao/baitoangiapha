@@ -149,9 +149,6 @@ class FamilyMemberController extends Controller
             $this->removeImage($member->avatar);
             $avatar = $this->storePublicImage($request->file('avatar'));
             $member->avatar = $avatar;
-        } else {
-            $this->removeImage($member->avatar);
-            $member->avatar = null;
         }
 
         if ($request->has('cccd_image_before')) {
