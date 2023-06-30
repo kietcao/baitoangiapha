@@ -1,5 +1,8 @@
 @extends('admin.main')
 @section('content')
+    @php
+        $template = 2;
+    @endphp
     <style>
         .modal {
             overflow-y: auto !important;
@@ -51,23 +54,10 @@
             align-items: center;
             background-color: rgb(0 0 0 / 68%);
         }
-
+        
         g,
         g * {
             cursor: pointer;
-        }
-
-        rect {
-            fill: white;
-            rx: 10;
-            ry: 10;
-            stroke: rgba(0, 0, 0, 0.048);
-            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.067));
-            transition: .3s;
-        }
-
-        g:hover rect {
-            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.278));
         }
 
         use {
@@ -80,6 +70,48 @@
             }
         }
     </style>
+    @if ($template == 1)
+        <style>
+            .bft-light {
+                background: white;
+            }
+            rect {
+                fill: white;
+                rx: 10;
+                ry: 10;
+                stroke: rgba(0, 0, 0, 0.048);
+                filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.067));
+                transition: .3s;
+            }
+
+            g:hover rect {
+                filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.278));
+            }
+        </style>
+    @elseif ($template == 2)
+        <style>
+            .bft-light {
+                background: transparent!important;
+            }
+            rect {
+                fill: rgba(255, 255, 255, 0);
+                rx: 0;
+                ry: 0;
+                stroke: rgba(255, 255, 255, 0);
+                transition: .3s;
+            }
+
+            .content {
+                background: url('img/fixed/nengiaphavang.jpg');
+                background-size: cover;
+                background-position: center center;
+            }
+
+            .content-header {
+                display: none;
+            }
+        </style>
+    @endif
     <div class="content-wrapper">
         @include('global.content_head', [
             'title' => 'Cây gia phả',
@@ -142,55 +174,77 @@
             dateFormat: "yy-mm-dd",
         });
 
-        let data = @json($members);
-        let treeConfig = {
-            nodeBinding: {
-                field_0: "fullname",
-                field_1: "birthday",
-                field_2: "leaveday",
-                img_0: "avatar"
-            },
-            nodes: data,
-            enableSearch: true,
-            nodeMouseClick: false,
-            // nodeMenu: {
-            //     edit: {
-            //         text: "Edit Now",
-            //         onClick: callHandler
-            //     }
-            // },
-            template: 'myTemplate'
-        }
+        
 
-        // if ($(window).width() <= 500) {
-        //     treeConfig.template = 'john';
-        // }
+        // Default template
+        let data = @json($members);
+        let template = '{{$template}}';
+        let treeConfig = {};
+        if (template == 1) {
+            if ($(window).width() <= 500) {
+                FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.john);
+                FamilyTree.templates.myTemplate.size = [110, 185];
+                FamilyTree.templates.myTemplate.field_1 = `<text data-width="230" style="font-size: 12px;" fill="#000000ab" x="60" y="155" text-anchor="middle">Ngày sinh: {val}</text>`;
+                FamilyTree.templates.myTemplate.field_2 = `<text data-width="230" style="font-size: 12px;" fill="#000000ab" x="60" y="175" text-anchor="middle">Ngày mất: {val}</text>`;
+                FamilyTree.templates.myTemplate.img_0 =
+                '<clipPath id="ulaImg"><circle cx="60" cy="65" r="40"></circle></clipPath>'
+                + '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="20" y="25" width="80" height="80">'
+                + '</image>';
+            } else {
+                treeConfig = {
+                    nodeBinding: {
+                        field_0: "fullname",
+                        field_1: "birthday",
+                        field_2: "leaveday",
+                        img_0: "avatar"
+                    },
+                    nodes: data,
+                    enableSearch: true,
+                    nodeMouseClick: false,
+                    template: 'myTemplate'
+                }
+                FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
+                FamilyTree.templates.myTemplate.size = [200, 230];
+                FamilyTree.templates.myTemplate.field_0 = `<text data-width="200" style="font-size: 14px;font-weight:bold; text-transform: uppercase;" fill="black" x="100" y="125" text-anchor="middle">{val}</text>`;
+                FamilyTree.templates.myTemplate.field_1 = `<text data-width="200" style="font-size: 12px;" fill="#000000ab" x="11" y="167" text-anchor="start">Ngày sinh: {val}</text>`;
+                FamilyTree.templates.myTemplate.field_2 = `<text data-width="200" style="font-size: 12px;" fill="#000000ab" x="11" y="185" text-anchor="start">Ngày mất: {val}</text>`;
+                FamilyTree.templates.myTemplate.img_0 =
+                '<clipPath id="ulaImg">'
+                + '<circle cx="100" cy="50" r="40"></circle>'
+                + '</clipPath>'
+                + '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="60" y="10" width="80" height="80">'
+                + '</image>';
+            }
+        }
+        else if (template == 2) {
+            if ($(window).width() <= 500) {
+                
+            } else {
+                treeConfig = {
+                    nodeBinding: {
+                        img_0: "avatar",
+                        field_1: "fullname",
+                    },
+                    nodes: data,
+                    enableSearch: true,
+                    nodeMouseClick: false,
+                    template: 'myTemplate'
+                }
+                FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
+                FamilyTree.templates.myTemplate.size = [100, 100];
+                FamilyTree.templates.myTemplate.img_0 =
+                '<clipPath id="ulaImg">'
+                + '<circle cx="50" cy="40" r="40"></circle>'
+                + '</clipPath>'
+                + '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="10" y="0" width="80" height="80">'
+                + '</image>';
+                FamilyTree.templates.myTemplate.field_1 = `<text data-width="200" style="font-size: 14px; font-weight:bold;" fill="#9c0000" x="50" y="95" text-anchor="middle">{val}</text>`;
+                
+            }
+        }
 
         if (data.length > 0) {
             var family = new FamilyTree(document.getElementById("tree"), treeConfig);
-        }
-
-        if ($(window).width() <= 500) {
-            FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.john);
-            FamilyTree.templates.myTemplate.size = [110, 185];
-            FamilyTree.templates.myTemplate.field_1 = `<text data-width="230" style="font-size: 12px;" fill="#000000ab" x="60" y="155" text-anchor="middle">Ngày sinh: {val}</text>`;
-            FamilyTree.templates.myTemplate.field_2 = `<text data-width="230" style="font-size: 12px;" fill="#000000ab" x="60" y="175" text-anchor="middle">Ngày mất: {val}</text>`;
-            FamilyTree.templates.myTemplate.img_0 =
-            '<clipPath id="ulaImg"><circle cx="60" cy="65" r="40"></circle></clipPath>'
-            + '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="20" y="25" width="80" height="80">'
-            + '</image>';
-        } else {
-            FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
-            FamilyTree.templates.myTemplate.size = [200, 230];
-            FamilyTree.templates.myTemplate.field_0 = `<text data-width="200" style="font-size: 14px;font-weight:bold; text-transform: uppercase;" fill="black" x="100" y="125" text-anchor="middle">{val}</text>`;
-            FamilyTree.templates.myTemplate.field_1 = `<text data-width="200" style="font-size: 12px;" fill="#000000ab" x="11" y="167" text-anchor="start">Ngày sinh: {val}</text>`;
-            FamilyTree.templates.myTemplate.field_2 = `<text data-width="200" style="font-size: 12px;" fill="#000000ab" x="11" y="185" text-anchor="start">Ngày mất: {val}</text>`;
-            FamilyTree.templates.myTemplate.img_0 =
-            '<clipPath id="ulaImg">'
-            + '<circle cx="100" cy="50" r="40"></circle>'
-            + '</clipPath>'
-            + '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="60" y="10" width="80" height="80">'
-            + '</image>';
         }
 
         family.on('click', function(sender, args) {
