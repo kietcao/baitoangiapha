@@ -116,6 +116,95 @@
         @include('global.content_head', [
             'title' => 'Cây gia phả',
         ])
+        @if ($template == 2)
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+            <style>
+                .title {
+                    /* background: url('img/fixed/nengiaphavang.jpg');
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-position: center center; */
+                }
+                .dragon-left,
+                .dragon-right {
+                    width: 300px;
+                    height: 100px;
+                }
+                .dragon-left {
+                    margin-left: 100px;
+                }
+                .dragon-right {
+                    margin-right: 100px;
+                }
+                .wrap-main-title {
+                    position: relative;
+                    width: 300px;
+                    height: 120px;
+                }
+                .wrap-main-title img {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    z-index: 1;
+                    top: 0;
+                    left: 0;
+                }
+                .wrap-main-title .wrap-title-text {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    z-index: 2;
+                    padding-top: 40px;
+                }
+                .wrap-main-title .wrap-title-text div{
+                    margin: 0;
+                    padding: 0;
+                    font-family: 'Pacifico', cursive;
+                    font-size: 20px;
+                    color: #c30000;
+                }
+                .wrap-title {
+                    justify-content: space-between;
+                }
+
+                @media screen and (max-width: 768px) {
+                    .dragon-left,
+                    .dragon-right {
+                        margin: 0;
+                        width: 150px;
+                    }
+                }
+                @media screen and (max-width: 534px) {
+                    .dragon-left,
+                    .dragon-right {
+                        margin: 0;
+                        width: 80px;
+                        height: auto;
+                    }
+                }
+                @media screen and (max-width: 425px) {
+                    .dragon-left,
+                    .dragon-right {
+                        display: none;
+                    }
+                }
+            </style>
+            <section class="title text-center pt-2 pb-2">
+                <div class="d-flex align-items-center wrap-title">
+                    <img class="dragon-left" src="img/fixed/rong_2.png" alt="rong_1">
+                    <div class="wrap-main-title ml-5 mr-5">
+                        <div class="wrap-title-text">
+                            <div>Phả Đồ Tộc</div>
+                            <div>Nguyễn Tiền Vũ</div>
+                        </div>
+                        <img src="img/fixed/title_bg_1.png" alt="title_bg_1">
+                    </div>
+                    <img class="dragon-right" src="img/fixed/rong_1.png" alt="rong_1">
+                </div>
+            </section>
+        @endif
         <section class="content">
             <div class="container-fluid">
                 <div style="width:100%; height:750px;" id="tree"><a href="{{route('add_first_member_view')}}" class="btn btn-info">Thêm thành viên mới</a></div>
@@ -217,30 +306,27 @@
             }
         }
         else if (template == 2) {
-            if ($(window).width() <= 500) {
-                
-            } else {
-                treeConfig = {
-                    nodeBinding: {
-                        img_0: "avatar",
-                        field_1: "fullname",
-                    },
-                    nodes: data,
-                    enableSearch: true,
-                    nodeMouseClick: false,
-                    template: 'myTemplate'
-                }
-                FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
-                FamilyTree.templates.myTemplate.size = [100, 100];
-                FamilyTree.templates.myTemplate.img_0 =
-                '<clipPath id="ulaImg">'
-                + '<circle cx="50" cy="40" r="40"></circle>'
-                + '</clipPath>'
-                + '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="10" y="0" width="80" height="80">'
-                + '</image>';
-                FamilyTree.templates.myTemplate.field_1 = `<text data-width="200" style="font-size: 14px; font-weight:bold;" fill="#9c0000" x="50" y="95" text-anchor="middle">{val}</text>`;
-                
+            treeConfig = {
+                nodeBinding: {
+                    img_0: "avatar",
+                    field_1: "fullname",
+                    field_2: "role_name",
+                },
+                nodes: data,
+                enableSearch: true,
+                nodeMouseClick: false,
+                template: 'myTemplate'
             }
+            FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
+            FamilyTree.templates.myTemplate.size = [100, 120];
+            FamilyTree.templates.myTemplate.img_0 =
+            '<clipPath id="ulaImg">'
+            + '<circle cx="50" cy="40" r="40"></circle>'
+            + '</clipPath>'
+            + '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="10" y="0" width="80" height="80">'
+            + '</image>';
+            FamilyTree.templates.myTemplate.field_1 = `<text data-width="200" style="font-size: 14px; font-weight:bold; text-transform: uppercase;" fill="#9c0000" x="50" y="115" text-anchor="middle">{val}</text>`;
+            FamilyTree.templates.myTemplate.field_2 = `<text data-width="200" style="font-size: 11px;" fill="red" x="50" y="98" text-anchor="middle">{val}</text>`;
         }
 
         if (data.length > 0) {
