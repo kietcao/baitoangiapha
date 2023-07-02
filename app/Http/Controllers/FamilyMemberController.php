@@ -8,6 +8,7 @@ use App\Constants\CurrentPage;
 use App\Http\Requests\CreateFamilyMemberRequest;
 use App\Http\Requests\CreateFirstMemberRequest;
 use App\Http\Requests\UpdateFamilyMemberRequest;
+use App\Models\ConfigTemp;
 use Illuminate\Http\Request;
 use App\Models\FamilyMember;
 use App\Traits\ImageTrait;
@@ -19,9 +20,11 @@ class FamilyMemberController extends Controller
 
     public function genealogy()
     {
+        $config = ConfigTemp::first();
         $members = FamilyMember::orderBy('position_index', 'asc')->get();
         return view('global.genealogy', [
             'members' => $members,
+            'config' => $config,
             'current_page' => CurrentPage::GENEALOGY,
         ]);
     }
@@ -220,12 +223,5 @@ class FamilyMemberController extends Controller
 
         $member->delete();
         return redirect()->back();
-    }
-
-    public function themes()
-    {
-        return view('global.themes', [
-            'current_page' => CurrentPage::THEMES,
-        ]);
     }
 }

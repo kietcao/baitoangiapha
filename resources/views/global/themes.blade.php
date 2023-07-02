@@ -42,12 +42,17 @@
         </style>
         <section class="content">
             <div class="container-fluid">
+                @if (session('message'))
+                    <div class="alert alert-success">
+                        {{ session('message') }}
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group m-auto text-center col-md-6">
                                 <label for="title">Tiêu đề gia phả</label>
-                                <input class="form-control text-center" type="text" name="title" id="title">
+                                <input class="form-control text-center title" type="text" value="{{$config->title}}">
                             </div>
                         </div>
                         <div class="row pt-4">
@@ -58,25 +63,40 @@
                                         <img class="w-100" src="img/fixed/template_1.jpg" alt="template_1">
                                     </div>
                                     <div class="template-title">Mặc định</div>
-                                    <input type="radio" checked>
+                                    <input
+                                        type="radio"
+                                        @if ($config->template_id == 1)
+                                        checked
+                                        @endif
+                                    >
                                 </div>
                             </div>
                             <div class="col-md-3 item-template" data-id="2">
                                 <div class="card-template">
                                     <div class="wrap-img">
-                                        <img class="w-100" src="https://scontent.fsgn5-11.fna.fbcdn.net/v/t1.15752-9/353853307_248513494552603_8744280463113893035_n.png?_nc_cat=110&ccb=1-7&_nc_sid=ae9488&_nc_ohc=4EuIlLFuu54AX-bBiJE&_nc_ht=scontent.fsgn5-11.fna&oh=03_AdQkeFU9Tn31ENsoeZfmEPTgJlQTf9GszMZav7tlQxtfJg&oe=64C37C51" alt="">
+                                        <img class="w-100" src="img/fixed/template_2.jpg" alt="template_2">
                                     </div>
-                                    <div class="template-title">Template rồng</div>
-                                    <input type="radio">
+                                    <div class="template-title">Template 1</div>
+                                    <input
+                                        type="radio"
+                                        @if ($config->template_id == 2)
+                                        checked
+                                        @endif
+                                    >
                                 </div>
                             </div>
                             <div class="col-md-3 item-template" data-id="3">
                                 <div class="card-template">
                                     <div class="wrap-img">
-                                        <img class="w-100" src="https://scontent.fsgn5-8.fna.fbcdn.net/v/t1.15752-9/356926881_991959705174385_3153345915926985896_n.png?_nc_cat=109&ccb=1-7&_nc_sid=ae9488&_nc_ohc=q409eilJE_AAX_K0bbm&_nc_ht=scontent.fsgn5-8.fna&oh=03_AdRYf4x4PKZL3ZjeOcABtLtZD4t3W_7GI0Ij_9z02WlLDQ&oe=64C3854F" alt="">
+                                        <img class="w-100" src="img/fixed/template_3.jpg" alt="template_3">
                                     </div>
-                                    <div class="template-title">Template rồng</div>
-                                    <input type="radio">
+                                    <div class="template-title">Template 2</div>
+                                    <input
+                                        type="radio"
+                                        @if ($config->template_id == 3)
+                                        checked
+                                        @endif
+                                    >
                                 </div>
                             </div>
                             <div class="col-md-3 item-template" data-id="4">
@@ -84,15 +104,23 @@
                                     <div class="wrap-img">
                                         <img class="w-100" src="https://scontent.fsgn5-14.fna.fbcdn.net/v/t1.15752-9/353788295_197863966216782_7709808599390926829_n.png?_nc_cat=106&ccb=1-7&_nc_sid=ae9488&_nc_ohc=ryS9N9DpuiwAX_exj9c&_nc_ht=scontent.fsgn5-14.fna&oh=03_AdR__SpPeA_Y-KK8PL8WVMy-VTgKnN5HDvlCcGmd2x5tOw&oe=64C364B4" alt="">
                                     </div>
-                                    <div class="template-title">Template rồng</div>
-                                    <input type="radio">
+                                    <div class="template-title">Template 3 (chưa sẵn có)</div>
+                                    <input
+                                        type="radio"
+                                        @if ($config->template_id == 4)
+                                        checked
+                                        @endif
+                                    >
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-12 text-center pt-4">
+                            <form class="col-12 text-center pt-4" action="{{route('setConfig')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="title" value="{{$config->title}}" id="title">
+                                <input type="hidden" name="template_id" value="{{$config->template_id}}" id="template_id">
                                 <button class="btn btn-info">Áp dụng</button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -100,9 +128,14 @@
         </section>
     </div>
     <script>
+        let template_id = '{{$config->template_id}}';
         $('.item-template').click(function(){
             $('.item-template').find('input').prop('checked', false);
             $(this).find('input').prop('checked', true);
+            $('#template_id').val($(this).attr('data-id'));
+        });
+        $('.title').change(function(){
+            $('#title').val($(this).val());
         });
     </script>
 @endsection

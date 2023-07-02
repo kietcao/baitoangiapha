@@ -1,7 +1,8 @@
 @extends('admin.main')
 @section('content')
     @php
-        $template = 2;
+        $template = $config->template_id;
+        $familyTitle = $config->title;
     @endphp
     <style>
         .modal {
@@ -101,7 +102,7 @@
                 transition: .3s;
             }
 
-            .content {
+            .content-wrapper {
                 background: url('img/fixed/nengiaphavang.jpg');
                 background-size: cover;
                 background-position: center center;
@@ -109,6 +110,33 @@
 
             .content-header {
                 display: none;
+            }
+        </style>
+    @elseif ($template == 3)
+        <style>
+            .bft-light {
+                background: transparent!important;
+            }
+            rect {
+                fill: rgb(255 183 0);
+                rx: 0;
+                ry: 0;
+                stroke: rgba(255, 255, 255, 0);
+                transition: .3s;
+            }
+            .content-wrapper {
+                background: url('img/fixed/nengiaphavang3.jpg');
+                background-size: cover;
+                background-position: center center;
+            }
+            .content-header {
+                display: none;
+            }
+
+            @media screen and (max-width: 500px) {
+                rect {
+                    fill: rgb(255 183 0 / 17%);
+                }
             }
         </style>
     @endif
@@ -119,7 +147,7 @@
         @if ($template == 2)
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
             <style>
                 .title {
                     /* background: url('img/fixed/nengiaphavang.jpg');
@@ -161,7 +189,7 @@
                 .wrap-main-title .wrap-title-text div{
                     margin: 0;
                     padding: 0;
-                    font-family: 'Pacifico', cursive;
+                    font-family: 'Lobster', cursive;
                     font-size: 20px;
                     color: #c30000;
                 }
@@ -197,11 +225,126 @@
                     <div class="wrap-main-title ml-5 mr-5">
                         <div class="wrap-title-text">
                             <div>Phả Đồ Tộc</div>
-                            <div>Nguyễn Tiền Vũ</div>
+                            <div>{{$familyTitle}}</div>
                         </div>
                         <img src="img/fixed/title_bg_1.png" alt="title_bg_1">
                     </div>
                     <img class="dragon-right" src="img/fixed/rong_1.png" alt="rong_1">
+                </div>
+            </section>
+        @elseif ($template == 3)
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
+            <style>
+                .dragon-left,
+                .dragon-right {
+                    width: 300px;
+                    height: 60px;
+                }
+                .dragon-left {
+                    margin-left: 100px;
+                }
+                .dragon-right {
+                    margin-right: 100px;
+                }
+                .wrap-main-title,
+                .wrap-main-title-mobile {
+                    position: relative;
+                    width: 500px;
+                    height: 150px;
+                }
+                .wrap-main-title img,
+                .wrap-main-title-mobile img {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    z-index: 1;
+                    top: 0;
+                    left: 0;
+                }
+                .wrap-main-title .wrap-title-text,
+                .wrap-main-title-mobile .wrap-title-text  {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    z-index: 2;
+                    padding-top: 25px;
+                }
+                .wrap-main-title .wrap-title-text div,
+                .wrap-main-title-mobile .wrap-title-text div{
+                    margin: 0;
+                    padding: 0;
+                    font-family: 'Pattaya', sans-serif;
+                    font-size: 25px;
+                    color: #c30000;
+                }
+                .wrap-title {
+                    justify-content: space-between;
+                }
+
+                .wrap-main-title-mobile {
+                    display: none;
+                }
+
+                @media screen and (max-width: 1586px) {
+                    .dragon-left,
+                    .dragon-right {
+                        width: 220px;
+                        height: auto;
+                    }
+
+                    .dragon-left {
+                        margin-left: 15px;
+                    }
+
+                    .dragon-right {
+                        margin-right: 15px;
+                    }
+                }
+
+                @media screen and (max-width: 1228px) {
+                    .dragon-left,
+                    .dragon-right {
+                        width: 150px;
+                    }
+                }
+
+                @media screen and (max-width: 768px) {
+                    .dragon-left,
+                    .dragon-right {
+                        width: 40%;
+                        height: auto;
+                        padding-bottom: 10px;
+                    }
+
+                    .wrap-main-title {
+                        display: none;
+                    }
+
+                    .wrap-main-title-mobile {
+                        display: block;
+                        width: 80%;
+                    }
+                }
+                
+            </style>
+            <section class="title text-center pt-2 pb-2">
+                <div class="d-flex align-items-center wrap-title">
+                    <img class="dragon-left" src="img/fixed/thu_phap_trai_1.png" alt="thu_phap_trai_1">
+                    <div class="wrap-main-title ml-5 mr-5">
+                        <div class="wrap-title-text">
+                            <div>{{$familyTitle}}</div>
+                        </div>
+                        <img src="img/fixed/title_bg_2.png" alt="title_bg_1">
+                    </div>
+                    <img class="dragon-right" src="img/fixed/thu_phap_phai_1.png" alt="thu_phap_phai_1">
+                </div>
+                <div class="wrap-main-title-mobile m-auto">
+                    <div class="wrap-title-text">
+                        <div>{{$familyTitle}}</div>
+                    </div>
+                    <img src="img/fixed/title_bg_2.png" alt="title_bg_1">
                 </div>
             </section>
         @endif
@@ -327,6 +470,58 @@
             + '</image>';
             FamilyTree.templates.myTemplate.field_1 = `<text data-width="200" style="font-size: 14px; font-weight:bold; text-transform: uppercase;" fill="#9c0000" x="50" y="115" text-anchor="middle">{val}</text>`;
             FamilyTree.templates.myTemplate.field_2 = `<text data-width="200" style="font-size: 11px;" fill="red" x="50" y="98" text-anchor="middle">{val}</text>`;
+        }
+        else if (template == 3) {
+
+            if ($(window).width() <= 500) {
+                treeConfig = {
+                    nodeBinding: {
+                        img_0: "avatar",
+                        field_1: "fullname",
+                        field_2: "role_name",
+                    },
+                    nodes: data,
+                    enableSearch: true,
+                    nodeMouseClick: false,
+                    template: 'myTemplate'
+                }
+                FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
+                FamilyTree.templates.myTemplate.size = [100, 120];
+                FamilyTree.templates.myTemplate.img_0 =
+                '<clipPath id="ulaImg">'
+                + '<circle cx="50" cy="40" r="40"></circle>'
+                + '</clipPath>'
+                + '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="10" y="0" width="80" height="80">'
+                + '</image>';
+                FamilyTree.templates.myTemplate.field_1 = `<text data-width="200" style="font-size: 14px; font-weight:bold; text-transform: uppercase;" fill="#9c0000" x="50" y="115" text-anchor="middle">{val}</text>`;
+                FamilyTree.templates.myTemplate.field_2 = `<text data-width="200" style="font-size: 11px;" fill="red" x="50" y="98" text-anchor="middle">{val}</text>`;
+            } else {
+                treeConfig = {
+                    nodeBinding: {
+                        img_0: "avatar",
+                        field_1: "role_name",
+                        field_2: "fullname",
+                        field_3: "birthday",
+                        field_4: "leaveday",
+                    },
+                    nodes: data,
+                    enableSearch: true,
+                    nodeMouseClick: false,
+                    template: 'myTemplate'
+                }
+                FamilyTree.templates.myTemplate = Object.assign({}, FamilyTree.templates.tommy);
+                FamilyTree.templates.myTemplate.size = [250, 100];
+                FamilyTree.templates.myTemplate.img_0 =
+                '<clipPath id="ulaImg">'
+                + '<circle cx="50" cy="50" r="40"></circle>'
+                + '</clipPath>'
+                + '<image preserveAspectRatio="xMidYMid slice" clip-path="url(#ulaImg)" xlink:href="{val}" x="10" y="10" width="80" height="80">'
+                + '</image>';
+                FamilyTree.templates.myTemplate.field_1 = `<text data-width="200" style="font-size: 14px; font-weight:bold; text-transform: uppercase;" fill="#9c0000" x="100" y="25">{val}</text>`;
+                FamilyTree.templates.myTemplate.field_2 = `<text data-width="200" style="font-size: 14px; text-transform: uppercase; font-weight: bold;" fill="red" x="100" y="45">{val}</text>`;
+                FamilyTree.templates.myTemplate.field_3 = `<text data-width="200" style="font-size: 11px;" fill="white" x="100" y="65">Ngày sinh: {val}</text>`;
+                FamilyTree.templates.myTemplate.field_4 = `<text data-width="200" style="font-size: 11px;" fill="white" x="100" y="78">Ngày mất: {val}</text>`;
+            }
         }
 
         if (data.length > 0) {

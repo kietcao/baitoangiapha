@@ -72,7 +72,7 @@
                     </ul> --}}
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('themes')}}" class="nav-link @if($current_page == App\Constants\CurrentPage::THEMES){{'active'}}@endif">
+                    <a href="{{route('config')}}" class="nav-link @if($current_page == App\Constants\CurrentPage::THEMES){{'active'}}@endif">
                         <i class="nav-icon fas fa-users-cog"></i>
                         <p>
                             Cấu hình cây

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -49,7 +50,8 @@ Route::group(['middleware' => ['auth-admin']], function() {
     Route::post('edit-event/{id}', [EventController::class, 'update'])->name('edit_event');
     Route::post('events', [EventController::class, 'getEvents'])->name('events');
     Route::post('event/delete', [EventController::class, 'delete'])->name('delete_event');
-    Route::get('genealogy/themes', [FamilyMemberController::class, 'themes'])->name('themes');
+    Route::get('genealogy/config', [ConfigController::class, 'config'])->name('config');
+    Route::post('genealogy/config', [ConfigController::class, 'setConfig'])->name('setConfig');
 
     Route::post('logout', [AuthController::class, 'logoutUser'])->name('logout_user');
 });
