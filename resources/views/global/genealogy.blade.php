@@ -144,7 +144,59 @@
         @include('global.content_head', [
             'title' => 'Cây gia phả',
         ])
-        @if ($template == 2)
+        @if ($template == 1)
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+            <style>
+                .content-header {
+                    display: none;
+                }
+                .wrap-main-title {
+                    position: relative;
+                    height: 120px;
+                }
+                .wrap-main-title img {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    z-index: 1;
+                    top: 0;
+                    left: 0;
+                }
+                .wrap-main-title .wrap-title-text {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    z-index: 2;
+                    padding-top: 30px;
+                }
+                .wrap-main-title .wrap-title-text div{
+                    margin: 0;
+                    padding: 0;
+                    font-family: 'Roboto Slab', serif;
+                    font-size: 18px;
+                    color: #002e4a;
+                }
+                .wrap-main-title .wrap-title-text div:nth-child(2){
+                    font-size: 24px;
+                    line-height: 1;
+                    font-weight: bold;
+                }
+                .wrap-title {
+                    justify-content: space-between;
+                }
+            </style>
+            <section class="title text-center pt-2 pb-2">
+                <div class="wrap-main-title ml-5 mr-5">
+                    <div class="wrap-title-text">
+                        <div>Phả Đồ</div>
+                        <div>{{$familyTitle}}</div>
+                    </div>
+                    <img src="img/fixed/title_bg_default.png" alt="title_bg_default">
+                </div>
+            </section>
+        @elseif ($template == 2)
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
@@ -190,8 +242,12 @@
                     margin: 0;
                     padding: 0;
                     font-family: 'Lobster', cursive;
-                    font-size: 20px;
+                    font-size: 18px;
                     color: #c30000;
+                }
+                .wrap-main-title .wrap-title-text div:nth-child(2){
+                    font-size: 24px;
+                    line-height: 1;
                 }
                 .wrap-title {
                     justify-content: space-between;
